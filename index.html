@@ -56,14 +56,214 @@ img { max-width: 100%; display: block; }
 .cursor-outline { width: 35px; height: 35px; border: 1.5px solid rgba(200,169,126,0.5); border-radius: 50%; position: fixed; pointer-events: none; z-index: 99998; transition: all 0.3s; transform: translate(-50%, -50%); }
 .cursor-outline.hover { width: 60px; height: 60px; background: rgba(200,169,126,0.1); border-color: #c8a97e; }
 
-#preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1a1a1a; z-index: 999999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s, visibility 0.6s; }
+/* ========== ARCHITECTURAL BUILDING PRELOADER ========== */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a1929;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s, visibility 0.8s;
+    overflow: hidden;
+}
 #preloader.loaded { opacity: 0; visibility: hidden; }
-.loader-content { text-align: center; }
-.loader-logo { font-family: 'Playfair Display', serif; font-size: 42px; color: #c8a97e; letter-spacing: 8px; margin-bottom: 30px; animation: pulse 1.5s infinite; }
-.loader-bar { width: 200px; height: 2px; background: rgba(255,255,255,0.1); margin: 0 auto; overflow: hidden; }
-.loader-bar::after { content: ''; display: block; width: 40%; height: 100%; background: #c8a97e; animation: loading 1.5s infinite; }
-@keyframes loading { 0% { transform: translateX(-100%); } 100% { transform: translateX(400%); } }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+#preloader::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(200,169,126,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,169,126,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+}
+
+.loader-content {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+}
+
+.building-loader {
+    width: 200px;
+    height: 250px;
+    margin: 0 auto 40px;
+    position: relative;
+}
+
+.building-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.building-svg path, .building-svg line, .building-svg rect, .building-svg circle {
+    fill: none;
+    stroke: #c8a97e;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawBuilding 3s ease-out forwards;
+}
+
+.building-svg .foundation { animation-delay: 0s; }
+.building-svg .floor-1 { animation-delay: 0.3s; }
+.building-svg .floor-2 { animation-delay: 0.6s; }
+.building-svg .floor-3 { animation-delay: 0.9s; }
+.building-svg .floor-4 { animation-delay: 1.2s; }
+.building-svg .roof { animation-delay: 1.5s; }
+.building-svg .windows { animation-delay: 1.8s; }
+.building-svg .door { animation-delay: 2.1s; }
+.building-svg .details { animation-delay: 2.4s; }
+
+@keyframes drawBuilding {
+    to { stroke-dashoffset: 0; }
+}
+
+.crane-arm {
+    position: absolute;
+    top: -30px;
+    right: -80px;
+    width: 120px;
+    height: 3px;
+    background: #c8a97e;
+    transform-origin: left center;
+    animation: craneSwing 3s ease-in-out infinite;
+}
+
+.crane-arm::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -50px;
+    width: 3px;
+    height: 100px;
+    background: #c8a97e;
+}
+
+.crane-arm::after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 3px;
+    width: 3px;
+    height: 30px;
+    background: #c8a97e;
+    animation: craneHook 3s ease-in-out infinite;
+}
+
+@keyframes craneSwing {
+    0%, 100% { transform: rotate(-15deg); }
+    50% { transform: rotate(15deg); }
+}
+
+@keyframes craneHook {
+    0%, 100% { height: 30px; }
+    50% { height: 60px; }
+}
+
+.blueprint-corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #c8a97e;
+}
+
+.blueprint-corner.top-left { top: 40px; left: 40px; border-right: none; border-bottom: none; }
+.blueprint-corner.top-right { top: 40px; right: 40px; border-left: none; border-bottom: none; }
+.blueprint-corner.bottom-left { bottom: 40px; left: 40px; border-right: none; border-top: none; }
+.blueprint-corner.bottom-right { bottom: 40px; right: 40px; border-left: none; border-top: none; }
+
+.loader-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: #c8a97e;
+    letter-spacing: 8px;
+    margin-bottom: 20px;
+    animation: fadeInText 1s ease 2s forwards;
+    opacity: 0;
+}
+
+.loader-tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(200,169,126,0.7);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    animation: fadeInText 1s ease 2.3s forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInText {
+    to { opacity: 1; }
+}
+
+.loader-progress {
+    width: 300px;
+    height: 2px;
+    background: rgba(200,169,126,0.1);
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInText 1s ease 2.5s forwards;
+    opacity: 0;
+}
+
+.loader-progress::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, transparent, #c8a97e, transparent);
+    animation: progressMove 2s ease-in-out infinite;
+}
+
+@keyframes progressMove {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.loader-percentage {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #c8a97e;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    animation: fadeInText 1s ease 2.5s forwards;
+    opacity: 0;
+}
+
+.blueprint-info {
+    position: absolute;
+    color: rgba(200,169,126,0.4);
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    animation: fadeInText 1s ease 2s forwards;
+    opacity: 0;
+}
+
+.blueprint-info.top-info { top: 60px; left: 60px; text-align: left; }
+.blueprint-info.bottom-info { bottom: 60px; right: 60px; text-align: right; }
+
+.ruler-h { position: absolute; top: 40px; left: 100px; right: 100px; height: 20px; border-bottom: 1px solid rgba(200,169,126,0.2); }
+.ruler-v { position: absolute; left: 40px; top: 100px; bottom: 100px; width: 20px; border-right: 1px solid rgba(200,169,126,0.2); }
 
 .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(to right, #c8a97e, #b8956a); z-index: 9999; transition: width 0.1s; width: 0%; }
 
@@ -151,7 +351,6 @@ section { padding: 120px 5%; position: relative; overflow: hidden; }
 .founder-social a:hover { transform: translateY(-5px); border-color: transparent; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
 .founder-social a svg { width: 20px; height: 20px; transition: 0.3s; }
 .founder-social a.instagram:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-.founder-social a.facebook:hover { background: #1877F2; }
 .founder-social a.linkedin:hover { background: #0A66C2; }
 .founder-social a.email:hover { background: #c8a97e; }
 .founder-social a:hover svg { fill: white; }
@@ -382,15 +581,87 @@ footer { background: #0a0a0a; color: rgba(255,255,255,0.6); padding: 80px 5% 25p
     .call-float svg { width: 24px; height: 24px; }
     .back-top { width: 50px; height: 50px; bottom: 20px; right: 20px; }
     .logo { font-size: 22px; }
+    .building-loader { width: 150px; height: 180px; }
+    .loader-logo { font-size: 28px; letter-spacing: 6px; }
+    .loader-progress { width: 250px; }
+    .blueprint-corner { width: 20px; height: 20px; }
+    .blueprint-corner.top-left { top: 20px; left: 20px; }
+    .blueprint-corner.top-right { top: 20px; right: 20px; }
+    .blueprint-corner.bottom-left { bottom: 20px; left: 20px; }
+    .blueprint-corner.bottom-right { bottom: 20px; right: 20px; }
+    .blueprint-info { display: none; }
+    .crane-arm { display: none; }
 }
 </style>
 </head>
 <body>
 
+<!-- ========== ARCHITECTURAL BUILDING PRELOADER ========== -->
 <div id="preloader">
+    <div class="blueprint-corner top-left"></div>
+    <div class="blueprint-corner top-right"></div>
+    <div class="blueprint-corner bottom-left"></div>
+    <div class="blueprint-corner bottom-right"></div>
+    
+    <div class="blueprint-info top-info">
+        SCALE: 1:100<br>
+        DATE: 2024<br>
+        PROJECT: ART DESIGNS
+    </div>
+    <div class="blueprint-info bottom-info">
+        BLUEPRINT #001<br>
+        ARCHITECT: T.BANSAL<br>
+        REV: 1.0
+    </div>
+    
+    <div class="ruler-h"></div>
+    <div class="ruler-v"></div>
+    
     <div class="loader-content">
+        <div class="building-loader">
+            <div class="crane-arm"></div>
+            <svg class="building-svg" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+                <line class="foundation" x1="20" y1="240" x2="180" y2="240"/>
+                <line class="foundation" x1="20" y1="240" x2="20" y2="230"/>
+                <line class="foundation" x1="180" y1="240" x2="180" y2="230"/>
+                <line class="foundation" x1="20" y1="230" x2="180" y2="230"/>
+                <rect class="floor-1" x="30" y="180" width="140" height="50"/>
+                <rect class="floor-2" x="35" y="140" width="130" height="40"/>
+                <rect class="floor-3" x="40" y="100" width="120" height="40"/>
+                <rect class="floor-4" x="45" y="60" width="110" height="40"/>
+                <path class="roof" d="M 45 60 L 100 30 L 155 60"/>
+                <line class="roof" x1="100" y1="30" x2="100" y2="20"/>
+                <circle class="roof" cx="100" cy="20" r="3"/>
+                <rect class="windows" x="45" y="195" width="15" height="20"/>
+                <rect class="windows" x="70" y="195" width="15" height="20"/>
+                <rect class="windows" x="115" y="195" width="15" height="20"/>
+                <rect class="windows" x="140" y="195" width="15" height="20"/>
+                <rect class="windows" x="50" y="150" width="12" height="18"/>
+                <rect class="windows" x="72" y="150" width="12" height="18"/>
+                <rect class="windows" x="94" y="150" width="12" height="18"/>
+                <rect class="windows" x="116" y="150" width="12" height="18"/>
+                <rect class="windows" x="138" y="150" width="12" height="18"/>
+                <rect class="windows" x="55" y="110" width="12" height="18"/>
+                <rect class="windows" x="77" y="110" width="12" height="18"/>
+                <rect class="windows" x="99" y="110" width="12" height="18"/>
+                <rect class="windows" x="121" y="110" width="12" height="18"/>
+                <rect class="windows" x="143" y="110" width="12" height="18"/>
+                <rect class="windows" x="60" y="70" width="12" height="18"/>
+                <rect class="windows" x="82" y="70" width="12" height="18"/>
+                <rect class="windows" x="104" y="70" width="12" height="18"/>
+                <rect class="windows" x="126" y="70" width="12" height="18"/>
+                <rect class="door" x="90" y="205" width="20" height="25"/>
+                <circle class="door" cx="105" cy="217" r="1"/>
+                <line class="details" x1="60" y1="140" x2="60" y2="230"/>
+                <line class="details" x1="140" y1="140" x2="140" y2="230"/>
+            </svg>
+        </div>
+        
         <div class="loader-logo">ART DESIGNS</div>
-        <div class="loader-bar"></div>
+        <div class="loader-tagline">Architects & Designers</div>
+        
+        <div class="loader-progress"></div>
+        <div class="loader-percentage" id="loadPercent">Loading... 0%</div>
     </div>
 </div>
 
@@ -468,17 +739,11 @@ footer { background: #0a0a0a; color: rgba(255,255,255,0.6); padding: 80px 5% 25p
             <h3 class="founder-name">Tarun Bansal</h3>
             <div class="founder-role">Co-Founder & Principal Architect</div>
             <div class="founder-edu">🎓 B.Arch, NIT Bhopal</div>
-            <p class="founder-desc">A visionary architect with a passion for innovative design and sustainable architecture. Leads the creative direction of Art Designs.</p>
+            <p class="founder-desc">A visionary architect with a passion for innovative design and sustainable architecture.</p>
             <div class="founder-social">
-                <a href="https://in.linkedin.com/company/art-designsncr" target="_blank" class="linkedin" title="LinkedIn">
-                    <svg viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                </a>
-                <a href="https://www.instagram.com/artdesignsarchitects/" target="_blank" class="instagram" title="Instagram">
-                    <svg viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                </a>
-                <a href="mailto:artdesignsncr@gmail.com" class="email" title="Email">
-                    <svg viewBox="0 0 24 24" fill="#666"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                </a>
+                <a href="https://in.linkedin.com/company/art-designsncr" target="_blank" class="linkedin"><svg viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                <a href="https://www.instagram.com/artdesignsarchitects/" target="_blank" class="instagram"><svg viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                <a href="mailto:artdesignsncr@gmail.com" class="email"><svg viewBox="0 0 24 24" fill="#666"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
             </div>
         </div>
         <div class="founder-card" data-aos="fade-up" data-aos-delay="200">
@@ -488,17 +753,11 @@ footer { background: #0a0a0a; color: rgba(255,255,255,0.6); padding: 80px 5% 25p
             <h3 class="founder-name">Sanjay Jamra</h3>
             <div class="founder-role">Co-Founder & Design Director</div>
             <div class="founder-edu">🎓 B.Arch, NIT Bhopal</div>
-            <p class="founder-desc">An accomplished architect specializing in modern design and project execution. Brings technical excellence and creative vision to every project.</p>
+            <p class="founder-desc">An accomplished architect specializing in modern design and project execution.</p>
             <div class="founder-social">
-                <a href="https://in.linkedin.com/company/art-designsncr" target="_blank" class="linkedin" title="LinkedIn">
-                    <svg viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                </a>
-                <a href="https://www.instagram.com/artdesignsarchitects/" target="_blank" class="instagram" title="Instagram">
-                    <svg viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                </a>
-                <a href="mailto:artdesignsncr@gmail.com" class="email" title="Email">
-                    <svg viewBox="0 0 24 24" fill="#666"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                </a>
+                <a href="https://in.linkedin.com/company/art-designsncr" target="_blank" class="linkedin"><svg viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                <a href="https://www.instagram.com/artdesignsarchitects/" target="_blank" class="instagram"><svg viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                <a href="mailto:artdesignsncr@gmail.com" class="email"><svg viewBox="0 0 24 24" fill="#666"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
             </div>
         </div>
     </div>
@@ -610,27 +869,18 @@ footer { background: #0a0a0a; color: rgba(255,255,255,0.6); padding: 80px 5% 25p
         <button class="testimonial-arrow next" onclick="nextTestimonial()">›</button>
         <div class="testimonial-slide active">
             <div class="stars">★ ★ ★ ★ ★</div>
-            <p class="testimonial-text">"Art Designs transformed our vision into reality. Their attention to detail and innovative approach resulted in a home that exceeded all our expectations. Highly professional team!"</p>
-            <div class="testimonial-author">
-                <div class="author-avatar">SG</div>
-                <div class="author-info"><h4>Sumesh Garg</h4><span>A1 Landcraft, Villa Project</span></div>
-            </div>
+            <p class="testimonial-text">"Art Designs transformed our vision into reality. Their attention to detail and innovative approach resulted in a home that exceeded all our expectations."</p>
+            <div class="testimonial-author"><div class="author-avatar">SG</div><div class="author-info"><h4>Sumesh Garg</h4><span>A1 Landcraft, Villa Project</span></div></div>
         </div>
         <div class="testimonial-slide">
             <div class="stars">★ ★ ★ ★ ★</div>
-            <p class="testimonial-text">"Working with Tarun and Sanjay was a wonderful experience. They understood our commercial requirements perfectly and delivered a stunning office space that has become the talk of the town."</p>
-            <div class="testimonial-author">
-                <div class="author-avatar">RK</div>
-                <div class="author-info"><h4>Rajesh Kumar</h4><span>CEO, Aquasense Ltd.</span></div>
-            </div>
+            <p class="testimonial-text">"Working with Tarun and Sanjay was wonderful. They delivered a stunning office space that has become the talk of the town."</p>
+            <div class="testimonial-author"><div class="author-avatar">RK</div><div class="author-info"><h4>Rajesh Kumar</h4><span>CEO, Aquasense Ltd.</span></div></div>
         </div>
         <div class="testimonial-slide">
             <div class="stars">★ ★ ★ ★ ★</div>
-            <p class="testimonial-text">"The team at Art Designs delivered our farmhouse project on time and within budget. Their landscape design is breathtaking. We couldn't be happier with the final result. Highly recommended!"</p>
-            <div class="testimonial-author">
-                <div class="author-avatar">PM</div>
-                <div class="author-info"><h4>Priya Mehta</h4><span>Saar Homes, Farmhouse Project</span></div>
-            </div>
+            <p class="testimonial-text">"The team delivered our farmhouse project on time and within budget. Their landscape design is breathtaking. Highly recommended!"</p>
+            <div class="testimonial-author"><div class="author-avatar">PM</div><div class="author-info"><h4>Priya Mehta</h4><span>Saar Homes, Farmhouse Project</span></div></div>
         </div>
     </div>
     <div class="testimonial-nav">
@@ -655,40 +905,20 @@ footer { background: #0a0a0a; color: rgba(255,255,255,0.6); padding: 80px 5% 25p
     <div class="contact-grid">
         <div class="contact-info-card" data-aos="fade-right">
             <div class="info-item">
-                <div class="info-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                </div>
-                <div class="info-content">
-                    <h4>Visit Our Studio</h4>
-                    <p><a href="https://www.google.com/maps/place/ArT+Designs/@28.6557241,77.4520349,954m" target="_blank">A-1 280 Swadeshi Polytex,<br>Kavi Nagar Industrial Area<br>Ghaziabad NCR, U.P. - 201002</a></p>
-                </div>
+                <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+                <div class="info-content"><h4>Visit Our Studio</h4><p><a href="https://www.google.com/maps/place/ArT+Designs/@28.6557241,77.4520349,954m" target="_blank">A-1 280 Swadeshi Polytex,<br>Kavi Nagar Industrial Area<br>Ghaziabad NCR, U.P. - 201002</a></p></div>
             </div>
             <div class="info-item">
-                <div class="info-icon">
-                    <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
-                </div>
-                <div class="info-content">
-                    <h4>Call Us</h4>
-                    <p><a href="tel:+917898185983">+91 7898185983</a><br><a href="tel:+919654352950">+91 9654352950</a></p>
-                </div>
+                <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg></div>
+                <div class="info-content"><h4>Call Us</h4><p><a href="tel:+917898185983">+91 7898185983</a><br><a href="tel:+919654352950">+91 9654352950</a></p></div>
             </div>
             <div class="info-item">
-                <div class="info-icon">
-                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                </div>
-                <div class="info-content">
-                    <h4>Email Us</h4>
-                    <p><a href="mailto:artdesignsncr@gmail.com">artdesignsncr@gmail.com</a></p>
-                </div>
+                <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+                <div class="info-content"><h4>Email Us</h4><p><a href="mailto:artdesignsncr@gmail.com">artdesignsncr@gmail.com</a></p></div>
             </div>
             <div class="info-item">
-                <div class="info-icon">
-                    <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-                </div>
-                <div class="info-content">
-                    <h4>Working Hours</h4>
-                    <p>Mon - Sat: 10:00 AM - 7:00 PM<br>Sunday: Closed</p>
-                </div>
+                <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></div>
+                <div class="info-content"><h4>Working Hours</h4><p>Mon - Sat: 10:00 AM - 7:00 PM<br>Sunday: Closed</p></div>
             </div>
         </div>
         <form class="contact-form" action="mailto:artdesignsncr@gmail.com" method="post" enctype="text/plain" data-aos="fade-left">
@@ -729,21 +959,11 @@ footer { background: #0a0a0a; color: rgba(255,255,255,0.6); padding: 80px 5% 25p
             <div class="footer-logo">ART <span>DESIGNS</span></div>
             <p>Architects & Designers creating timeless architectural masterpieces in Ghaziabad NCR. Founded by Tarun Bansal & Sanjay Jamra.</p>
             <div class="social">
-                <a href="https://www.instagram.com/artdesignsarchitects/" target="_blank" class="instagram" title="Instagram">
-                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                </a>
-                <a href="https://www.facebook.com/artdesignsncr/" target="_blank" class="facebook" title="Facebook">
-                    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                </a>
-                <a href="https://in.linkedin.com/company/art-designsncr" target="_blank" class="linkedin" title="LinkedIn">
-                    <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                </a>
-                <a href="https://wa.me/917898185983" target="_blank" class="whatsapp" title="WhatsApp">
-                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                </a>
-                <a href="https://www.google.com/maps/place/ArT+Designs/@28.6557241,77.4520349,954m" target="_blank" class="gmaps" title="Google Maps">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                </a>
+                <a href="https://www.instagram.com/artdesignsarchitects/" target="_blank" class="instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                <a href="https://www.facebook.com/artdesignsncr/" target="_blank" class="facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                <a href="https://in.linkedin.com/company/art-designsncr" target="_blank" class="linkedin"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                <a href="https://wa.me/917898185983" target="_blank" class="whatsapp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+                <a href="https://www.google.com/maps/place/ArT+Designs/@28.6557241,77.4520349,954m" target="_blank" class="gmaps"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></a>
             </div>
         </div>
         <div class="footer-links">
@@ -782,11 +1002,9 @@ footer { background: #0a0a0a; color: rgba(255,255,255,0.6); padding: 80px 5% 25p
     </div>
 </footer>
 
-<a href="tel:+917898185983" class="call-float" title="Call Now">
-    <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
-</a>
+<a href="tel:+917898185983" class="call-float"><svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg></a>
 
-<a href="https://wa.me/917898185983?text=Hello!%20I'm%20interested%20in%20your%20architectural%20services." class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+<a href="https://wa.me/917898185983?text=Hello!%20I'm%20interested%20in%20your%20architectural%20services." class="whatsapp-float" target="_blank">
     <svg viewBox="0 0 32 32"><path d="M16.001 0h-.002C7.164 0 .002 7.163.002 16c0 3.505 1.127 6.754 3.045 9.395L1.05 31.325l6.13-1.958A15.925 15.925 0 0016 32c8.836 0 15.999-7.163 15.999-16S24.837 0 16.001 0zm9.311 22.6c-.386 1.09-1.918 1.994-3.14 2.258-.836.178-1.928.32-5.604-1.202-4.7-1.947-7.726-6.72-7.962-7.03-.226-.31-1.9-2.53-1.9-4.828 0-2.298 1.168-3.426 1.638-3.906.386-.396.844-.574 1.126-.574.282 0 .564.002.81.014.26.012.61-.098.954.728.354.848 1.202 2.928 1.308 3.14.106.212.176.462.036.744-.14.282-.212.462-.424.706-.212.244-.446.544-.638.732-.212.212-.432.44-.186.864.246.424 1.096 1.808 2.354 2.928 1.622 1.446 2.988 1.898 3.412 2.11.424.212.674.176.926-.106.252-.282 1.06-1.238 1.344-1.66.282-.424.564-.354.954-.212.39.142 2.478 1.166 2.902 1.378.424.212.706.318.812.494.106.176.106 1.024-.28 2.114z"/></svg>
     <span class="whatsapp-tooltip">Chat with us</span>
 </a>
@@ -844,7 +1062,33 @@ projectsData.forEach(function(project, index) {
     item.addEventListener('mouseleave', function() { clearInterval(slideInt); });
 });
 
-window.addEventListener('load', function() { setTimeout(function() { document.getElementById('preloader').classList.add('loaded'); }, 1500); });
+// Preloader with percentage counter
+var loadPercent = 0;
+var loadInterval = setInterval(function() {
+    loadPercent += Math.floor(Math.random() * 12) + 3;
+    if (loadPercent >= 100) {
+        loadPercent = 100;
+        clearInterval(loadInterval);
+    }
+    var loadElement = document.getElementById('loadPercent');
+    if (loadElement) {
+        loadElement.textContent = 'Loading... ' + loadPercent + '%';
+    }
+}, 200);
+
+window.addEventListener('load', function() { 
+    setTimeout(function() { 
+        loadPercent = 100;
+        var loadElement = document.getElementById('loadPercent');
+        if (loadElement) {
+            loadElement.textContent = 'Complete! 100%';
+        }
+        setTimeout(function() {
+            document.getElementById('preloader').classList.add('loaded');
+        }, 500);
+    }, 3500);
+});
+
 AOS.init({ duration: 1000, easing: 'ease-out-cubic', once: true, offset: 100 });
 
 if (window.innerWidth > 968) {
