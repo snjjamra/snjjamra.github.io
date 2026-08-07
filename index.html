@@ -51,69 +51,14 @@ img { max-width: 100%; display: block; }
 .cursor-outline { width: 35px; height: 35px; border: 1.5px solid rgba(200,169,126,0.5); border-radius: 50%; position: fixed; pointer-events: none; z-index: 99998; transition: all 0.3s; transform: translate(-50%, -50%); }
 .cursor-outline.hover { width: 60px; height: 60px; background: rgba(200,169,126,0.1); border-color: #c8a97e; }
 
-/* ========== ARCHITECTURAL PRELOADER - MATCHING THEME ========== */
-#preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #f8f6f3;
-    z-index: 999999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.8s, visibility 0.8s;
-    overflow: hidden;
-}
+#preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #f8f6f3; z-index: 999999; display: flex; align-items: center; justify-content: center; transition: opacity 0.8s, visibility 0.8s; overflow: hidden; }
 #preloader.loaded { opacity: 0; visibility: hidden; }
-
-#preloader::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: 
-        linear-gradient(rgba(200,169,126,0.12) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200,169,126,0.12) 1px, transparent 1px);
-    background-size: 40px 40px;
-    animation: gridMove 20s linear infinite;
-}
-
-@keyframes gridMove {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(40px, 40px); }
-}
-
-.loader-content {
-    position: relative;
-    text-align: center;
-    z-index: 2;
-}
-
-.building-loader {
-    width: 220px;
-    height: 270px;
-    margin: 0 auto 40px;
-    position: relative;
-}
-
-.building-svg {
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-}
-
-.building-svg path, .building-svg line, .building-svg rect, .building-svg circle {
-    fill: none;
-    stroke: #c8a97e;
-    stroke-width: 2.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: drawBuilding 3s ease-out forwards;
-}
-
+#preloader::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(200,169,126,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(200,169,126,0.12) 1px, transparent 1px); background-size: 40px 40px; animation: gridMove 20s linear infinite; }
+@keyframes gridMove { 0% { transform: translate(0, 0); } 100% { transform: translate(40px, 40px); } }
+.loader-content { position: relative; text-align: center; z-index: 2; }
+.building-loader { width: 220px; height: 270px; margin: 0 auto 40px; position: relative; }
+.building-svg { width: 100%; height: 100%; overflow: visible; }
+.building-svg path, .building-svg line, .building-svg rect, .building-svg circle { fill: none; stroke: #c8a97e; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: drawBuilding 3s ease-out forwards; }
 .building-svg .foundation { animation-delay: 0s; }
 .building-svg .floor-1 { animation-delay: 0.3s; }
 .building-svg .floor-2 { animation-delay: 0.6s; }
@@ -123,184 +68,34 @@ img { max-width: 100%; display: block; }
 .building-svg .windows { animation-delay: 1.8s; }
 .building-svg .door { animation-delay: 2.1s; }
 .building-svg .details { animation-delay: 2.4s; }
-
-@keyframes drawBuilding {
-    to { stroke-dashoffset: 0; }
-}
-
-.crane-arm {
-    position: absolute;
-    top: -30px;
-    right: -80px;
-    width: 120px;
-    height: 3px;
-    background: linear-gradient(90deg, #c8a97e, #b8956a);
-    transform-origin: left center;
-    animation: craneSwing 3s ease-in-out infinite;
-    border-radius: 2px;
-}
-
-.crane-arm::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: -50px;
-    width: 3px;
-    height: 100px;
-    background: linear-gradient(to bottom, #c8a97e, #b8956a);
-    border-radius: 2px;
-}
-
-.crane-arm::after {
-    content: '';
-    position: absolute;
-    right: 20px;
-    top: 3px;
-    width: 3px;
-    height: 30px;
-    background: #b8956a;
-    animation: craneHook 3s ease-in-out infinite;
-    border-radius: 2px;
-}
-
-@keyframes craneSwing {
-    0%, 100% { transform: rotate(-15deg); }
-    50% { transform: rotate(15deg); }
-}
-
-@keyframes craneHook {
-    0%, 100% { height: 30px; }
-    50% { height: 60px; }
-}
-
-.blueprint-corner {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border: 2px solid #c8a97e;
-}
-
+@keyframes drawBuilding { to { stroke-dashoffset: 0; } }
+.crane-arm { position: absolute; top: -30px; right: -80px; width: 120px; height: 3px; background: linear-gradient(90deg, #c8a97e, #b8956a); transform-origin: left center; animation: craneSwing 3s ease-in-out infinite; border-radius: 2px; }
+.crane-arm::before { content: ''; position: absolute; left: 0; top: -50px; width: 3px; height: 100px; background: linear-gradient(to bottom, #c8a97e, #b8956a); border-radius: 2px; }
+.crane-arm::after { content: ''; position: absolute; right: 20px; top: 3px; width: 3px; height: 30px; background: #b8956a; animation: craneHook 3s ease-in-out infinite; border-radius: 2px; }
+@keyframes craneSwing { 0%, 100% { transform: rotate(-15deg); } 50% { transform: rotate(15deg); } }
+@keyframes craneHook { 0%, 100% { height: 30px; } 50% { height: 60px; } }
+.blueprint-corner { position: absolute; width: 40px; height: 40px; border: 2px solid #c8a97e; }
 .blueprint-corner.top-left { top: 40px; left: 40px; border-right: none; border-bottom: none; }
 .blueprint-corner.top-right { top: 40px; right: 40px; border-left: none; border-bottom: none; }
 .blueprint-corner.bottom-left { bottom: 40px; left: 40px; border-right: none; border-top: none; }
 .blueprint-corner.bottom-right { bottom: 40px; right: 40px; border-left: none; border-top: none; }
-
-.loader-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 42px;
-    color: #1a1a1a;
-    letter-spacing: 8px;
-    margin-bottom: 15px;
-    animation: fadeInText 1s ease 2s forwards;
-    opacity: 0;
-    font-weight: 700;
-}
-
-.loader-logo .highlight {
-    color: #c8a97e;
-    font-style: italic;
-    font-weight: 400;
-}
-
-.loader-tagline {
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    color: #b8956a;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    margin-bottom: 40px;
-    animation: fadeInText 1s ease 2.3s forwards;
-    opacity: 0;
-    font-weight: 500;
-}
-
-@keyframes fadeInText {
-    to { opacity: 1; }
-}
-
-.loader-progress {
-    width: 320px;
-    height: 3px;
-    background: rgba(200,169,126,0.15);
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-    animation: fadeInText 1s ease 2.5s forwards;
-    opacity: 0;
-    border-radius: 2px;
-}
-
-.loader-progress::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(to right, transparent, #c8a97e, transparent);
-    animation: progressMove 2s ease-in-out infinite;
-}
-
-@keyframes progressMove {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-.loader-percentage {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: #c8a97e;
-    letter-spacing: 3px;
-    margin-top: 20px;
-    animation: fadeInText 1s ease 2.5s forwards;
-    opacity: 0;
-    font-weight: 500;
-}
-
-.blueprint-info {
-    position: absolute;
-    color: rgba(200,169,126,0.6);
-    font-family: 'Courier New', monospace;
-    font-size: 11px;
-    letter-spacing: 2px;
-    animation: fadeInText 1s ease 2s forwards;
-    opacity: 0;
-    font-weight: 600;
-}
-
+.loader-logo { font-family: 'Playfair Display', serif; font-size: 42px; color: #1a1a1a; letter-spacing: 8px; margin-bottom: 15px; animation: fadeInText 1s ease 2s forwards; opacity: 0; font-weight: 700; }
+.loader-logo .highlight { color: #c8a97e; font-style: italic; font-weight: 400; }
+.loader-tagline { font-family: 'Inter', sans-serif; font-size: 12px; color: #b8956a; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px; animation: fadeInText 1s ease 2.3s forwards; opacity: 0; font-weight: 500; }
+@keyframes fadeInText { to { opacity: 1; } }
+.loader-progress { width: 320px; height: 3px; background: rgba(200,169,126,0.15); margin: 0 auto; position: relative; overflow: hidden; animation: fadeInText 1s ease 2.5s forwards; opacity: 0; border-radius: 2px; }
+.loader-progress::before { content: ''; position: absolute; top: 0; left: 0; height: 100%; width: 100%; background: linear-gradient(to right, transparent, #c8a97e, transparent); animation: progressMove 2s ease-in-out infinite; }
+@keyframes progressMove { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.loader-percentage { font-family: 'Inter', sans-serif; font-size: 13px; color: #c8a97e; letter-spacing: 3px; margin-top: 20px; animation: fadeInText 1s ease 2.5s forwards; opacity: 0; font-weight: 500; }
+.blueprint-info { position: absolute; color: rgba(200,169,126,0.6); font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 2px; animation: fadeInText 1s ease 2s forwards; opacity: 0; font-weight: 600; }
 .blueprint-info.top-info { top: 60px; left: 60px; text-align: left; line-height: 1.8; }
 .blueprint-info.bottom-info { bottom: 60px; right: 60px; text-align: right; line-height: 1.8; }
-
 .ruler-h { position: absolute; top: 40px; left: 100px; right: 100px; height: 20px; border-bottom: 1.5px solid rgba(200,169,126,0.3); }
 .ruler-v { position: absolute; left: 40px; top: 100px; bottom: 100px; width: 20px; border-right: 1.5px solid rgba(200,169,126,0.3); }
-
-/* Decorative circles */
-.decor-circle {
-    position: absolute;
-    border-radius: 50%;
-    border: 2px solid rgba(200,169,126,0.15);
-    animation: rotate 30s linear infinite;
-}
-
-.decor-circle.c1 {
-    width: 300px;
-    height: 300px;
-    top: -150px;
-    right: -150px;
-}
-
-.decor-circle.c2 {
-    width: 250px;
-    height: 250px;
-    bottom: -125px;
-    left: -125px;
-    animation-direction: reverse;
-}
-
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
+.decor-circle { position: absolute; border-radius: 50%; border: 2px solid rgba(200,169,126,0.15); animation: rotate 30s linear infinite; }
+.decor-circle.c1 { width: 300px; height: 300px; top: -150px; right: -150px; }
+.decor-circle.c2 { width: 250px; height: 250px; bottom: -125px; left: -125px; animation-direction: reverse; }
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
 .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(to right, #c8a97e, #b8956a); z-index: 9999; transition: width 0.1s; width: 0%; }
 
@@ -413,25 +208,12 @@ section { padding: 120px 5%; position: relative; overflow: hidden; }
 .service-card h3 { font-family: 'Playfair Display', serif; font-size: 24px; color: #1a1a1a; margin-bottom: 15px; transition: 0.3s; }
 .service-card p { color: #888; font-size: 14px; line-height: 1.8; transition: 0.3s; }
 
-.team { background: white; }
-.team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; }
-.team-card { background: #f8f6f3; border-radius: 12px; overflow: hidden; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); text-align: center; position: relative; }
-.team-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: #c8a97e; transform: scaleX(0); transition: transform 0.6s ease; transform-origin: left; }
-.team-card:hover::after { transform: scaleX(1); }
-.team-card:hover { transform: translateY(-15px); box-shadow: 0 30px 70px rgba(0,0,0,0.15); background: white; }
-.team-photo { width: 100%; height: 340px; overflow: hidden; background: linear-gradient(135deg, #1a1a1a, #333); position: relative; }
-.team-photo img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-.team-card:hover .team-photo img { transform: scale(1.15); }
-.team-info { padding: 30px 20px; }
-.team-name { font-family: 'Playfair Display', serif; font-size: 22px; color: #1a1a1a; margin-bottom: 8px; font-weight: 600; }
-.team-role { color: #c8a97e; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; }
-
-.founders { background: #f8f6f3; }
+.founders { background: white; }
 .founders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; max-width: 1100px; margin: 0 auto; }
-.founder-card { background: white; padding: 50px 40px; border-radius: 12px; text-align: center; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); border: 2px solid transparent; position: relative; overflow: hidden; }
+.founder-card { background: #f8f6f3; padding: 50px 40px; border-radius: 12px; text-align: center; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); border: 2px solid transparent; position: relative; overflow: hidden; }
 .founder-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #c8a97e, #b8956a); transform: scaleX(0); transform-origin: left; transition: transform 0.6s ease; }
 .founder-card:hover::before { transform: scaleX(1); }
-.founder-card:hover { transform: translateY(-15px); box-shadow: 0 30px 70px rgba(0,0,0,0.15); border-color: rgba(200,169,126,0.3); }
+.founder-card:hover { transform: translateY(-15px); box-shadow: 0 30px 70px rgba(0,0,0,0.15); background: white; border-color: rgba(200,169,126,0.3); }
 .founder-photo { width: 200px; height: 200px; margin: 0 auto 30px; border-radius: 50%; overflow: hidden; border: 5px solid #c8a97e; background: linear-gradient(135deg, #c8a97e, #8b7355); position: relative; transition: 0.5s; }
 .founder-card:hover .founder-photo { transform: scale(1.05) rotate(5deg); }
 .founder-photo img { width: 100%; height: 100%; object-fit: cover; }
@@ -440,13 +222,26 @@ section { padding: 120px 5%; position: relative; overflow: hidden; }
 .founder-edu { color: #888; font-size: 14px; font-style: italic; margin-bottom: 20px; }
 .founder-desc { color: #666; font-size: 14px; line-height: 1.8; margin-bottom: 25px; }
 .founder-social { display: flex; justify-content: center; gap: 12px; }
-.founder-social a { width: 45px; height: 45px; border-radius: 50%; background: #f8f6f3; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; transition: 0.4s; }
+.founder-social a { width: 45px; height: 45px; border-radius: 50%; background: white; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; transition: 0.4s; }
 .founder-social a:hover { transform: translateY(-5px); border-color: transparent; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
 .founder-social a svg { width: 20px; height: 20px; transition: 0.3s; }
 .founder-social a.instagram:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
 .founder-social a.linkedin:hover { background: #0A66C2; }
 .founder-social a.email:hover { background: #c8a97e; }
 .founder-social a:hover svg { fill: white; }
+
+.team { background: #f8f6f3; }
+.team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; }
+.team-card { background: white; border-radius: 12px; overflow: hidden; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); text-align: center; position: relative; }
+.team-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: #c8a97e; transform: scaleX(0); transition: transform 0.6s ease; transform-origin: left; }
+.team-card:hover::after { transform: scaleX(1); }
+.team-card:hover { transform: translateY(-15px); box-shadow: 0 30px 70px rgba(0,0,0,0.15); }
+.team-photo { width: 100%; height: 340px; overflow: hidden; background: linear-gradient(135deg, #1a1a1a, #333); position: relative; }
+.team-photo img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+.team-card:hover .team-photo img { transform: scale(1.15); }
+.team-info { padding: 30px 20px; }
+.team-name { font-family: 'Playfair Display', serif; font-size: 22px; color: #1a1a1a; margin-bottom: 8px; font-weight: 600; }
+.team-role { color: #c8a97e; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; }
 
 .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px; }
 .lightbox.active { display: flex; animation: lightboxFadeIn 0.4s ease; }
@@ -634,30 +429,17 @@ footer { background: #0a0a0a; color: rgba(255,255,255,0.6); padding: 80px 5% 25p
 </head>
 <body>
 
-<!-- ========== ARCHITECTURAL PRELOADER - THEME MATCHED ========== -->
 <div id="preloader">
     <div class="decor-circle c1"></div>
     <div class="decor-circle c2"></div>
-    
     <div class="blueprint-corner top-left"></div>
     <div class="blueprint-corner top-right"></div>
     <div class="blueprint-corner bottom-left"></div>
     <div class="blueprint-corner bottom-right"></div>
-    
-    <div class="blueprint-info top-info">
-        SCALE: 1:100<br>
-        DATE: 2024<br>
-        PROJECT: ART DESIGNS
-    </div>
-    <div class="blueprint-info bottom-info">
-        BLUEPRINT #001<br>
-        ARCHITECT: T.BANSAL<br>
-        REV: 1.0
-    </div>
-    
+    <div class="blueprint-info top-info">SCALE: 1:100<br>DATE: 2024<br>PROJECT: ART DESIGNS</div>
+    <div class="blueprint-info bottom-info">BLUEPRINT #001<br>ARCHITECT: T.BANSAL<br>REV: 1.0</div>
     <div class="ruler-h"></div>
     <div class="ruler-v"></div>
-    
     <div class="loader-content">
         <div class="building-loader">
             <div class="crane-arm"></div>
@@ -697,10 +479,8 @@ footer { background: #0a0a0a; color: rgba(255,255,255,0.6); padding: 80px 5% 25p
                 <line class="details" x1="140" y1="140" x2="140" y2="230"/>
             </svg>
         </div>
-        
         <div class="loader-logo">ART <span class="highlight">DESIGNS</span></div>
         <div class="loader-tagline">Architects & Designers</div>
-        
         <div class="loader-progress"></div>
         <div class="loader-percentage" id="loadPercent">Loading... 0%</div>
     </div>
@@ -717,7 +497,7 @@ footer { background: #0a0a0a; color: rgba(255,255,255,0.6); padding: 80px 5% 25p
         <li><a href="#about">About</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="#services">Services</a></li>
-        <li><a href="#team">Team</a></li>
+        <li><a href="#founders">Team</a></li>
         <li><a href="#contact" class="nav-cta">Get Quote</a></li>
     </ul>
     <div class="hamburger" id="hamburger">
@@ -800,32 +580,6 @@ footer { background: #0a0a0a; color: rgba(255,255,255,0.6); padding: 80px 5% 25p
     </div>
 </section>
 
-<section class="team" id="team">
-    <div class="section-header" data-aos="fade-up">
-        <span class="section-tag">Our Team</span>
-        <h2 class="section-title">Meet Our <span>Experts</span></h2>
-        <p class="section-subtitle">Talented professionals dedicated to bringing your vision to life</p>
-    </div>
-    <div class="team-grid">
-        <div class="team-card" data-aos="fade-up" data-aos-delay="100">
-            <div class="team-photo"><img src="sourav-agarwal.jpg" alt="Sourav Agarwal"></div>
-            <div class="team-info"><h3 class="team-name">Sourav Agarwal</h3><div class="team-role">Senior Architect</div></div>
-        </div>
-        <div class="team-card" data-aos="fade-up" data-aos-delay="200">
-            <div class="team-photo"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop" alt="Vivek Yadav"></div>
-            <div class="team-info"><h3 class="team-name">Vivek Yadav</h3><div class="team-role">Draftsman</div></div>
-        </div>
-        <div class="team-card" data-aos="fade-up" data-aos-delay="300">
-            <div class="team-photo"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop" alt="Anubhav Goel"></div>
-            <div class="team-info"><h3 class="team-name">Anubhav Goel</h3><div class="team-role">Civil Engineer</div></div>
-        </div>
-        <div class="team-card" data-aos="fade-up" data-aos-delay="400">
-            <div class="team-photo"><img src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=400&auto=format&fit=crop" alt="Sahil"></div>
-            <div class="team-info"><h3 class="team-name">Sahil</h3><div class="team-role">Interior Designer</div></div>
-        </div>
-    </div>
-</section>
-
 <section class="founders" id="founders">
     <div class="section-header" data-aos="fade-up">
         <span class="section-tag">Meet Our Founders</span>
@@ -860,6 +614,32 @@ footer { background: #0a0a0a; color: rgba(255,255,255,0.6); padding: 80px 5% 25p
                 <a href="https://www.instagram.com/artdesignsarchitects/" target="_blank" class="instagram"><svg viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
                 <a href="mailto:artdesignsncr@gmail.com" class="email"><svg viewBox="0 0 24 24" fill="#666"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="team" id="team">
+    <div class="section-header" data-aos="fade-up">
+        <span class="section-tag">Our Team</span>
+        <h2 class="section-title">Meet Our <span>Experts</span></h2>
+        <p class="section-subtitle">Talented professionals dedicated to bringing your vision to life</p>
+    </div>
+    <div class="team-grid">
+        <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="team-photo"><img src="sourav-agarwal.jpg" alt="Sourav Agarwal"></div>
+            <div class="team-info"><h3 class="team-name">Sourav Agarwal</h3><div class="team-role">Senior Architect</div></div>
+        </div>
+        <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="team-photo"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop" alt="Vivek Yadav"></div>
+            <div class="team-info"><h3 class="team-name">Vivek Yadav</h3><div class="team-role">Draftsman</div></div>
+        </div>
+        <div class="team-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="team-photo"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop" alt="Anubhav Goel"></div>
+            <div class="team-info"><h3 class="team-name">Anubhav Goel</h3><div class="team-role">Civil Engineer</div></div>
+        </div>
+        <div class="team-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="team-photo"><img src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=400&auto=format&fit=crop" alt="Sahil"></div>
+            <div class="team-info"><h3 class="team-name">Sahil</h3><div class="team-role">Interior Designer</div></div>
         </div>
     </div>
 </section>
@@ -1014,7 +794,7 @@ footer { background: #0a0a0a; color: rgba(255,255,255,0.6); padding: 80px 5% 25p
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#team">Our Team</a></li>
+                <li><a href="#founders">Our Team</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -1106,26 +886,17 @@ projectsData.forEach(function(project, index) {
 var loadPercent = 0;
 var loadInterval = setInterval(function() {
     loadPercent += Math.floor(Math.random() * 12) + 3;
-    if (loadPercent >= 100) {
-        loadPercent = 100;
-        clearInterval(loadInterval);
-    }
+    if (loadPercent >= 100) { loadPercent = 100; clearInterval(loadInterval); }
     var loadElement = document.getElementById('loadPercent');
-    if (loadElement) {
-        loadElement.textContent = 'Loading... ' + loadPercent + '%';
-    }
+    if (loadElement) { loadElement.textContent = 'Loading... ' + loadPercent + '%'; }
 }, 200);
 
 window.addEventListener('load', function() { 
     setTimeout(function() { 
         loadPercent = 100;
         var loadElement = document.getElementById('loadPercent');
-        if (loadElement) {
-            loadElement.textContent = 'Complete! 100%';
-        }
-        setTimeout(function() {
-            document.getElementById('preloader').classList.add('loaded');
-        }, 500);
+        if (loadElement) { loadElement.textContent = 'Complete! 100%'; }
+        setTimeout(function() { document.getElementById('preloader').classList.add('loaded'); }, 500);
     }, 3500);
 });
 
