@@ -59,12 +59,11 @@ section { padding: 100px 5%; }
 .feature { color: #333; font-size: 14px; font-weight: 500; }
 .feature::before { content: '✓ '; color: #c8a97e; font-weight: bold; }
 
-/* Founders Section */
 .founders { background: white; padding: 100px 5%; }
 .founders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; max-width: 1100px; margin: 0 auto; }
 .founder-card { background: #f8f6f3; padding: 40px 30px; border-radius: 8px; text-align: center; transition: 0.4s; border: 1px solid #f0ece6; }
 .founder-card:hover { transform: translateY(-10px); box-shadow: 0 25px 60px rgba(0,0,0,0.15); background: white; border-color: #c8a97e; }
-.founder-photo { width: 180px; height: 180px; margin: 0 auto 25px; border-radius: 50%; overflow: hidden; border: 4px solid #c8a97e; background: linear-gradient(135deg, #c8a97e, #8b7355); position: relative; }
+.founder-photo { width: 180px; height: 180px; margin: 0 auto 25px; border-radius: 50%; overflow: hidden; border: 4px solid #c8a97e; background: linear-gradient(135deg, #c8a97e, #8b7355); }
 .founder-photo img { width: 100%; height: 100%; object-fit: cover; }
 .founder-name { font-family: 'Playfair Display', serif; font-size: 26px; color: #1a1a1a; margin-bottom: 8px; font-weight: 600; }
 .founder-role { color: #c8a97e; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; font-weight: 500; }
@@ -74,12 +73,11 @@ section { padding: 100px 5%; }
 .founder-social a { width: 38px; height: 38px; border-radius: 50%; background: white; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; transition: 0.3s; color: #888; }
 .founder-social a:hover { background: #c8a97e; color: white; border-color: #c8a97e; transform: translateY(-3px); }
 
-/* Team Section */
 .team { background: #f8f6f3; }
 .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; max-width: 1200px; margin: 0 auto; }
 .team-card { background: white; border-radius: 8px; overflow: hidden; transition: 0.4s; text-align: center; }
 .team-card:hover { transform: translateY(-10px); box-shadow: 0 25px 60px rgba(0,0,0,0.15); }
-.team-photo { width: 100%; height: 280px; overflow: hidden; background: linear-gradient(135deg, #1a1a1a, #333); position: relative; }
+.team-photo { width: 100%; height: 280px; overflow: hidden; background: linear-gradient(135deg, #1a1a1a, #333); }
 .team-photo img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
 .team-card:hover .team-photo img { transform: scale(1.1); }
 .team-info { padding: 25px 20px; }
@@ -94,17 +92,36 @@ section { padding: 100px 5%; }
 .service-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: #1a1a1a; margin-bottom: 15px; }
 .service-card p { color: #888; font-size: 14px; line-height: 1.8; }
 
+/* Portfolio with Categories */
 .portfolio-section { background: #f8f6f3; }
-.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
-.portfolio-item { position: relative; overflow: hidden; border-radius: 5px; height: 320px; cursor: pointer; background: linear-gradient(135deg, #1a1a1a, #333); }
+
+/* Category Filter Buttons */
+.portfolio-filters { display: flex; justify-content: center; gap: 12px; margin-bottom: 50px; flex-wrap: wrap; max-width: 1000px; margin-left: auto; margin-right: auto; }
+.filter-btn { padding: 12px 28px; background: white; border: 2px solid #e0e0e0; border-radius: 30px; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #666; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+.filter-btn:hover { border-color: #c8a97e; color: #c8a97e; transform: translateY(-2px); }
+.filter-btn.active { background: #c8a97e; border-color: #c8a97e; color: white; box-shadow: 0 10px 25px rgba(200,169,126,0.3); }
+.filter-icon { font-size: 16px; }
+
+/* Portfolio Grid */
+.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; max-width: 1200px; margin: 0 auto; }
+.portfolio-item { position: relative; overflow: hidden; border-radius: 8px; height: 350px; cursor: pointer; background: linear-gradient(135deg, #1a1a1a, #333); transition: 0.5s; opacity: 1; transform: scale(1); }
+.portfolio-item.hidden { display: none; }
+.portfolio-item.fade-in { animation: fadeInUp 0.6s ease forwards; }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
 .portfolio-item:hover img { transform: scale(1.1); }
 .portfolio-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,26,26,0.95), rgba(26,26,26,0.3)); display: flex; align-items: flex-end; padding: 30px; opacity: 1; transition: 0.4s; }
 .portfolio-item:hover .portfolio-overlay { background: linear-gradient(to top, rgba(26,26,26,0.98), rgba(26,26,26,0.5)); }
-.portfolio-info { transform: translateY(0); transition: 0.4s; }
-.portfolio-cat { color: #c8a97e; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; display: block; }
-.portfolio-info h3 { color: white; font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 5px; }
-.portfolio-info p { color: rgba(255,255,255,0.7); font-size: 13px; }
+.portfolio-cat-badge { position: absolute; top: 20px; right: 20px; background: #c8a97e; color: white; padding: 6px 14px; border-radius: 20px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; z-index: 2; }
+.portfolio-info { color: white; }
+.portfolio-info h3 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 8px; font-weight: 600; }
+.portfolio-info p { color: rgba(255,255,255,0.8); font-size: 13px; margin-bottom: 4px; }
+.portfolio-info .location { color: #c8a97e; font-size: 12px; letter-spacing: 1px; }
 
 .process { background: white; }
 .process-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
@@ -183,6 +200,7 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
     .services-grid, .portfolio-grid, .process-grid, .footer-grid, .team-grid { grid-template-columns: 1fr; }
     .about-img, .about-img img { height: 350px; }
     .founder-photo { width: 140px; height: 140px; }
+    .filter-btn { padding: 10px 18px; font-size: 11px; }
 }
 </style>
 </head>
@@ -239,7 +257,6 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
     </div>
 </section>
 
-<!-- FOUNDERS SECTION -->
 <section class="founders" id="founders">
     <div class="section-header">
         <span class="section-tag">Meet Our Founders</span>
@@ -278,7 +295,6 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
     </div>
 </section>
 
-<!-- TEAM SECTION -->
 <section class="team" id="team">
     <div class="section-header">
         <span class="section-tag">Our Team</span>
@@ -301,7 +317,7 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
             </div>
             <div class="team-info">
                 <h3 class="team-name">Sahil</h3>
-                <div class="team-role">Architect</div>
+                <div class="team-role">Interior Designer</div>
             </div>
         </div>
         <div class="team-card">
@@ -341,19 +357,252 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
     </div>
 </section>
 
+<!-- PORTFOLIO SECTION WITH CATEGORIES -->
 <section class="portfolio-section" id="portfolio">
     <div class="section-header">
         <span class="section-tag">Our Work</span>
         <h2 class="section-title">Featured <span>Projects</span></h2>
-        <p class="section-subtitle">A showcase of our finest architectural achievements</p>
+        <p class="section-subtitle">Explore our diverse portfolio across multiple architectural categories</p>
     </div>
-    <div class="portfolio-grid">
-        <div class="portfolio-item"><img src="https://picsum.photos/600/400?random=21" alt="Nehru Nagar Villa"><div class="portfolio-overlay"><div class="portfolio-info"><span class="portfolio-cat">Residential</span><h3>Nehru Nagar Villa</h3><p>Contemporary luxury living</p></div></div></div>
-        <div class="portfolio-item"><img src="https://picsum.photos/600/400?random=22" alt="Corporate Office"><div class="portfolio-overlay"><div class="portfolio-info"><span class="portfolio-cat">Commercial</span><h3>Corporate Office</h3><p>Aquasense Office</p></div></div></div>
-        <div class="portfolio-item"><img src="https://picsum.photos/600/400?random=23" alt="Luxury Villa"><div class="portfolio-overlay"><div class="portfolio-info"><span class="portfolio-cat">Interior</span><h3>Luxury Villa</h3><p>Elegant premium finishes</p></div></div></div>
-        <div class="portfolio-item"><img src="https://picsum.photos/600/400?random=24" alt="Landcraft Residence"><div class="portfolio-overlay"><div class="portfolio-info"><span class="portfolio-cat">Residential</span><h3>Landcraft Residence</h3><p>Modern minimalist home</p></div></div></div>
-        <div class="portfolio-item"><img src="https://picsum.photos/600/400?random=25" alt="Saar Homes"><div class="portfolio-overlay"><div class="portfolio-info"><span class="portfolio-cat">Landscape</span><h3>Saar Homes</h3><p>Farmhouse Villa design</p></div></div></div>
-        <div class="portfolio-item"><img src="https://picsum.photos/600/400?random=26" alt="Vaikadum Villasa"><div class="portfolio-overlay"><div class="portfolio-info"><span class="portfolio-cat">Interior</span><h3>Vaikadum Villasa</h3><p>Villa Interior</p></div></div></div>
+    
+    <!-- Category Filter Buttons -->
+    <div class="portfolio-filters">
+        <button class="filter-btn active" data-filter="all">
+            <span class="filter-icon">🎨</span> All Projects
+        </button>
+        <button class="filter-btn" data-filter="residential">
+            <span class="filter-icon">🏠</span> Residential
+        </button>
+        <button class="filter-btn" data-filter="commercial">
+            <span class="filter-icon">🏢</span> Commercial
+        </button>
+        <button class="filter-btn" data-filter="industrial">
+            <span class="filter-icon">🏭</span> Industrial
+        </button>
+        <button class="filter-btn" data-filter="office">
+            <span class="filter-icon">💼</span> Office
+        </button>
+        <button class="filter-btn" data-filter="interior">
+            <span class="filter-icon">🛋️</span> Interior
+        </button>
+        <button class="filter-btn" data-filter="landscape">
+            <span class="filter-icon">🌳</span> Landscape
+        </button>
+    </div>
+    
+    <!-- Portfolio Grid -->
+    <div class="portfolio-grid" id="portfolioGrid">
+        
+        <!-- RESIDENTIAL PROJECTS (3) -->
+        <div class="portfolio-item" data-category="residential">
+            <div class="portfolio-cat-badge">Residential</div>
+            <img src="https://picsum.photos/600/400?random=301" alt="Nehru Nagar Villa">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Nehru Nagar Villa</h3>
+                    <p>Contemporary luxury living with modern amenities</p>
+                    <p class="location">📍 Ghaziabad</p>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item" data-category="residential">
+            <div class="portfolio-cat-badge">Residential</div>
+            <img src="https://picsum.photos/600/400?random=302" alt="Landcraft Residence">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Landcraft Residence</h3>
+                    <p>Modern minimalist home design</p>
+                    <p class="location">📍 Delhi NCR</p>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item" data-category="residential">
+            <div class="portfolio-cat-badge">Residential</div>
+            <img src="https://picsum.photos/600/400?random=303" alt="Saar Homes">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Saar Homes</h3>
+                    <p>Farmhouse Villa with lush surroundings</p>
+                    <p class="location">📍 Noida</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- COMMERCIAL PROJECTS (3) -->
+        <div class="portfolio-item" data-category="commercial">
+            <div class="portfolio-cat-badge">Commercial</div>
+            <img src="https://picsum.photos/600/400?random=311" alt="Shopping Complex">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Metro Plaza</h3>
+                    <p>Modern shopping complex with retail spaces</p>
+                    <p class="location">📍 Ghaziabad</p>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item" data-category="commercial">
+            <div class="portfolio-cat-badge">Commercial</div>
+            <img src="https://picsum.photos/600/400?random=312" alt="Business Center">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Trade Tower</h3>
+                    <p>Multi-purpose commercial building</p>
+                    <p class="location">📍 Delhi</p>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item" data-category="commercial">
+            <div class="portfolio-cat-badge">Commercial</div>
+            <img src="https://picsum.photos/600/400?random=313" alt="Retail Mall">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Grand Mall</h3>
+                    <p>Premium retail and entertainment hub</p>
+                    <p class="location">📍 Noida</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- INDUSTRIAL PROJECTS (3) -->
+        <div class="portfolio-item" data-category="industrial">
+            <div class="portfolio-cat-badge">Industrial</div>
+            <img src="https://picsum.photos/600/400?random=321" alt="Manufacturing Plant">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Swadeshi Polytex Factory</h3>
+                    <p>Modern manufacturing facility design</p>
+                    <p class="location">📍 Ghaziabad</p>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item" data-category="industrial">
+            <div class="portfolio-cat-badge">Industrial</div>
+            <img src="https://picsum.photos/600/400?random=322" alt="Warehouse">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Logistics Warehouse</h3>
+                    <p>Large-scale storage and distribution center</p>
+                    <p class="location">📍 Noida</p>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item" data-category="industrial">
+            <div class="portfolio-cat-badge">Industrial</div>
+            <img src="https://picsum.photos/600/400?random=323" alt="Industrial Complex">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Industrial Complex</h3>
+                    <p>Multi-unit industrial facility</p>
+                    <p class="location">📍 Kavi Nagar</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- OFFICE PROJECTS (3) -->
+        <div class="portfolio-item" data-category="office">
+            <div class="portfolio-cat-badge">Office</div>
+            <img src="https://picsum.photos/600/400?random=331" alt="Aquasense Office">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Aquasense Office</h3>
+                    <p>Corporate office with modern amenities</p>
+                    <p class="location">📍 Ghaziabad</p>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item" data-category="office">
+            <div class="portfolio-cat-badge">Office</div>
+            <img src="https://picsum.photos/600/400?random=332" alt="Tech Hub">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Tech Hub Workspace</h3>
+                    <p>Contemporary office for IT company</p>
+                    <p class="location">📍 Noida</p>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item" data-category="office">
+            <div class="portfolio-cat-badge">Office</div>
+            <img src="https://picsum.photos/600/400?random=333" alt="Executive Office">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Executive Suite</h3>
+                    <p>Premium corporate office design</p>
+                    <p class="location">📍 Delhi</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- INTERIOR PROJECTS (3) -->
+        <div class="portfolio-item" data-category="interior">
+            <div class="portfolio-cat-badge">Interior</div>
+            <img src="https://picsum.photos/600/400?random=341" alt="Luxury Villa Interior">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Luxury Villa Interior</h3>
+                    <p>Elegant premium finishes and decor</p>
+                    <p class="location">📍 Ghaziabad</p>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item" data-category="interior">
+            <div class="portfolio-cat-badge">Interior</div>
+            <img src="https://picsum.photos/600/400?random=342" alt="Vaikadum Villasa">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Vaikadum Villasa</h3>
+                    <p>Traditional meets modern interior</p>
+                    <p class="location">📍 Delhi NCR</p>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item" data-category="interior">
+            <div class="portfolio-cat-badge">Interior</div>
+            <img src="https://picsum.photos/600/400?random=343" alt="Modern Apartment">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Sky Apartment</h3>
+                    <p>Contemporary apartment interior</p>
+                    <p class="location">📍 Noida</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- LANDSCAPE PROJECTS (3) -->
+        <div class="portfolio-item" data-category="landscape">
+            <div class="portfolio-cat-badge">Landscape</div>
+            <img src="https://picsum.photos/600/400?random=351" alt="Villa Garden">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Villa Garden Design</h3>
+                    <p>Beautifully landscaped outdoor space</p>
+                    <p class="location">📍 Ghaziabad</p>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item" data-category="landscape">
+            <div class="portfolio-cat-badge">Landscape</div>
+            <img src="https://picsum.photos/600/400?random=352" alt="Farmhouse Landscape">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Farmhouse Landscape</h3>
+                    <p>Extensive garden with water features</p>
+                    <p class="location">📍 Noida</p>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item" data-category="landscape">
+            <div class="portfolio-cat-badge">Landscape</div>
+            <img src="https://picsum.photos/600/400?random=353" alt="Corporate Garden">
+            <div class="portfolio-overlay">
+                <div class="portfolio-info">
+                    <h3>Corporate Green Space</h3>
+                    <p>Office campus landscape design</p>
+                    <p class="location">📍 Delhi</p>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </section>
 
@@ -442,6 +691,7 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
                 <option>Architectural Design</option>
                 <option>Interior Design</option>
                 <option>Commercial Project</option>
+                <option>Industrial Project</option>
                 <option>Landscape Design</option>
                 <option>Consultation</option>
             </select>
@@ -473,10 +723,11 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
         <div class="footer-links">
             <h4>Services</h4>
             <ul>
-                <li><a href="#services">Architectural Design</a></li>
+                <li><a href="#services">Residential</a></li>
+                <li><a href="#services">Commercial</a></li>
+                <li><a href="#services">Industrial</a></li>
                 <li><a href="#services">Interior Design</a></li>
-                <li><a href="#services">3D Visualization</a></li>
-                <li><a href="#services">Urban Planning</a></li>
+                <li><a href="#services">Landscape</a></li>
             </ul>
         </div>
         <div class="footer-contact">
@@ -495,18 +746,73 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
 <button class="back-top" id="backTop">↑</button>
 
 <script>
+// Navigation scroll effect
 window.addEventListener('scroll', function() {
     var nav = document.getElementById('nav');
     var backTop = document.getElementById('backTop');
     if (window.scrollY > 100) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
     if (window.scrollY > 500) { backTop.classList.add('show'); } else { backTop.classList.remove('show'); }
 });
+
+// Mobile menu
 var hamburger = document.getElementById('hamburger');
 var navMenu = document.getElementById('navMenu');
 hamburger.addEventListener('click', function() { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); });
-document.querySelectorAll('.nav-menu a').forEach(function(link) { link.addEventListener('click', function() { hamburger.classList.remove('active'); navMenu.classList.remove('active'); }); });
-document.getElementById('backTop').addEventListener('click', function() { window.scrollTo({top: 0, behavior: 'smooth'}); });
-document.querySelectorAll('a[href^="#"]').forEach(function(link) { link.addEventListener('click', function(e) { e.preventDefault(); var target = document.querySelector(this.getAttribute('href')); if (target) { target.scrollIntoView({behavior: 'smooth'}); } }); });
+document.querySelectorAll('.nav-menu a').forEach(function(link) { 
+    link.addEventListener('click', function() { 
+        hamburger.classList.remove('active'); 
+        navMenu.classList.remove('active'); 
+    }); 
+});
+
+// Back to top
+document.getElementById('backTop').addEventListener('click', function() { 
+    window.scrollTo({top: 0, behavior: 'smooth'}); 
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(function(link) { 
+    link.addEventListener('click', function(e) { 
+        e.preventDefault(); 
+        var target = document.querySelector(this.getAttribute('href')); 
+        if (target) { 
+            target.scrollIntoView({behavior: 'smooth'}); 
+        } 
+    }); 
+});
+
+// PORTFOLIO FILTER FUNCTIONALITY
+document.addEventListener('DOMContentLoaded', function() {
+    var filterBtns = document.querySelectorAll('.filter-btn');
+    var portfolioItems = document.querySelectorAll('.portfolio-item');
+    
+    filterBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterBtns.forEach(function(b) { b.classList.remove('active'); });
+            // Add active class to clicked button
+            btn.classList.add('active');
+            
+            var filter = btn.getAttribute('data-filter');
+            
+            // Show/hide portfolio items
+            portfolioItems.forEach(function(item, index) {
+                var category = item.getAttribute('data-category');
+                
+                if (filter === 'all' || category === filter) {
+                    item.classList.remove('hidden');
+                    // Add animation with delay
+                    setTimeout(function() {
+                        item.classList.add('fade-in');
+                    }, index * 100);
+                } else {
+                    item.classList.add('hidden');
+                    item.classList.remove('fade-in');
+                }
+            });
+        });
+    });
+});
 </script>
 
 </body>
