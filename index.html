@@ -119,6 +119,214 @@ section { padding: 100px 5%; }
 .portfolio-info p { color: rgba(255,255,255,0.8); font-size: 13px; margin-bottom: 4px; }
 .portfolio-info .location { color: #c8a97e; font-size: 12px; letter-spacing: 1px; }
 
+/* Click hint on portfolio items */
+.click-hint { position: absolute; top: 20px; left: 20px; background: rgba(0,0,0,0.7); color: white; padding: 8px 14px; border-radius: 20px; font-size: 11px; opacity: 0; transition: 0.3s; z-index: 2; letter-spacing: 1px; }
+.portfolio-item:hover .click-hint { opacity: 1; }
+
+/* ========== LIGHTBOX STYLES ========== */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.lightbox.active {
+    display: flex;
+    animation: lightboxFadeIn 0.3s ease;
+}
+
+@keyframes lightboxFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: lightboxScale 0.4s ease;
+}
+
+@keyframes lightboxScale {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.lightbox-slider {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    height: 70vh;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #000;
+}
+
+.lightbox-slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.lightbox-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.lightbox-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.lightbox-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+}
+
+/* Navigation Arrows */
+.lightbox-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55px;
+    height: 55px;
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.3);
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: 0.3s;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+}
+
+.lightbox-arrow:hover {
+    background: #c8a97e;
+    border-color: #c8a97e;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-arrow.prev { left: 20px; }
+.lightbox-arrow.next { right: 20px; }
+
+/* Close Button */
+.lightbox-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.3);
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.lightbox-close:hover {
+    background: #c8a97e;
+    border-color: #c8a97e;
+    transform: rotate(90deg);
+}
+
+/* Info Bar */
+.lightbox-info {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.lightbox-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.lightbox-desc {
+    color: #666;
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.lightbox-location {
+    color: #c8a97e;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-top: 3px;
+}
+
+.lightbox-counter {
+    background: #f8f6f3;
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: #c8a97e;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Dots */
+.lightbox-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.lightbox-dot {
+    width: 10px;
+    height: 10px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.lightbox-dot.active {
+    background: #c8a97e;
+    width: 30px;
+    border-radius: 5px;
+}
+
 .process { background: white; }
 .process-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
 .process-step { text-align: center; padding: 30px 20px; position: relative; }
@@ -182,6 +390,8 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
     .footer-grid { grid-template-columns: repeat(2, 1fr); }
     .founders-grid { grid-template-columns: 1fr; }
     .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .lightbox-slider { height: 50vh; }
+    .lightbox-info { flex-direction: column; text-align: center; }
 }
 @media (max-width: 640px) {
     nav { padding: 15px 20px; }
@@ -197,6 +407,9 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
     .about-img, .about-img img { height: 350px; }
     .founder-photo { width: 140px; height: 140px; }
     .filter-btn { padding: 10px 18px; font-size: 11px; }
+    .lightbox-arrow { width: 45px; height: 45px; font-size: 20px; }
+    .lightbox-arrow.prev { left: 10px; }
+    .lightbox-arrow.next { right: 10px; }
 }
 </style>
 </head>
@@ -291,7 +504,6 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
     </div>
 </section>
 
-<!-- TEAM SECTION - WITH SOURAV'S REAL PHOTO -->
 <section class="team" id="team">
     <div class="section-header">
         <span class="section-tag">Our Team</span>
@@ -358,7 +570,7 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
     <div class="section-header">
         <span class="section-tag">Our Work</span>
         <h2 class="section-title">Featured <span>Projects</span></h2>
-        <p class="section-subtitle">Explore our diverse portfolio across multiple architectural categories</p>
+        <p class="section-subtitle">Click any project to view detailed gallery</p>
     </div>
     
     <div class="portfolio-filters">
@@ -387,8 +599,10 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
     
     <div class="portfolio-grid" id="portfolioGrid">
         
-        <div class="portfolio-item" data-category="residential">
+        <!-- RESIDENTIAL PROJECTS -->
+        <div class="portfolio-item" data-category="residential" onclick="openLightbox(0)">
             <div class="portfolio-cat-badge">Residential</div>
+            <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=301" alt="Nehru Nagar Villa">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
@@ -398,8 +612,9 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
                 </div>
             </div>
         </div>
-        <div class="portfolio-item" data-category="residential">
+        <div class="portfolio-item" data-category="residential" onclick="openLightbox(1)">
             <div class="portfolio-cat-badge">Residential</div>
+            <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=302" alt="Landcraft Residence">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
@@ -409,8 +624,9 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
                 </div>
             </div>
         </div>
-        <div class="portfolio-item" data-category="residential">
+        <div class="portfolio-item" data-category="residential" onclick="openLightbox(2)">
             <div class="portfolio-cat-badge">Residential</div>
+            <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=303" alt="Saar Homes">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
@@ -421,9 +637,11 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
             </div>
         </div>
         
-        <div class="portfolio-item" data-category="commercial">
+        <!-- COMMERCIAL PROJECTS -->
+        <div class="portfolio-item" data-category="commercial" onclick="openLightbox(3)">
             <div class="portfolio-cat-badge">Commercial</div>
-            <img src="https://picsum.photos/600/400?random=311" alt="Shopping Complex">
+            <span class="click-hint">👆 Click to view</span>
+            <img src="https://picsum.photos/600/400?random=311" alt="Metro Plaza">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
                     <h3>Metro Plaza</h3>
@@ -432,9 +650,10 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
                 </div>
             </div>
         </div>
-        <div class="portfolio-item" data-category="commercial">
+        <div class="portfolio-item" data-category="commercial" onclick="openLightbox(4)">
             <div class="portfolio-cat-badge">Commercial</div>
-            <img src="https://picsum.photos/600/400?random=312" alt="Business Center">
+            <span class="click-hint">👆 Click to view</span>
+            <img src="https://picsum.photos/600/400?random=312" alt="Trade Tower">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
                     <h3>Trade Tower</h3>
@@ -443,9 +662,10 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
                 </div>
             </div>
         </div>
-        <div class="portfolio-item" data-category="commercial">
+        <div class="portfolio-item" data-category="commercial" onclick="openLightbox(5)">
             <div class="portfolio-cat-badge">Commercial</div>
-            <img src="https://picsum.photos/600/400?random=313" alt="Retail Mall">
+            <span class="click-hint">👆 Click to view</span>
+            <img src="https://picsum.photos/600/400?random=313" alt="Grand Mall">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
                     <h3>Grand Mall</h3>
@@ -455,9 +675,11 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
             </div>
         </div>
         
-        <div class="portfolio-item" data-category="industrial">
+        <!-- INDUSTRIAL PROJECTS -->
+        <div class="portfolio-item" data-category="industrial" onclick="openLightbox(6)">
             <div class="portfolio-cat-badge">Industrial</div>
-            <img src="https://picsum.photos/600/400?random=321" alt="Manufacturing Plant">
+            <span class="click-hint">👆 Click to view</span>
+            <img src="https://picsum.photos/600/400?random=321" alt="Swadeshi Polytex Factory">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
                     <h3>Swadeshi Polytex Factory</h3>
@@ -466,9 +688,10 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
                 </div>
             </div>
         </div>
-        <div class="portfolio-item" data-category="industrial">
+        <div class="portfolio-item" data-category="industrial" onclick="openLightbox(7)">
             <div class="portfolio-cat-badge">Industrial</div>
-            <img src="https://picsum.photos/600/400?random=322" alt="Warehouse">
+            <span class="click-hint">👆 Click to view</span>
+            <img src="https://picsum.photos/600/400?random=322" alt="Logistics Warehouse">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
                     <h3>Logistics Warehouse</h3>
@@ -477,8 +700,9 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
                 </div>
             </div>
         </div>
-        <div class="portfolio-item" data-category="industrial">
+        <div class="portfolio-item" data-category="industrial" onclick="openLightbox(8)">
             <div class="portfolio-cat-badge">Industrial</div>
+            <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=323" alt="Industrial Complex">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
@@ -489,8 +713,10 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
             </div>
         </div>
         
-        <div class="portfolio-item" data-category="office">
+        <!-- OFFICE PROJECTS -->
+        <div class="portfolio-item" data-category="office" onclick="openLightbox(9)">
             <div class="portfolio-cat-badge">Office</div>
+            <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=331" alt="Aquasense Office">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
@@ -500,8 +726,9 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
                 </div>
             </div>
         </div>
-        <div class="portfolio-item" data-category="office">
+        <div class="portfolio-item" data-category="office" onclick="openLightbox(10)">
             <div class="portfolio-cat-badge">Office</div>
+            <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=332" alt="Tech Hub">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
@@ -511,9 +738,10 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
                 </div>
             </div>
         </div>
-        <div class="portfolio-item" data-category="office">
+        <div class="portfolio-item" data-category="office" onclick="openLightbox(11)">
             <div class="portfolio-cat-badge">Office</div>
-            <img src="https://picsum.photos/600/400?random=333" alt="Executive Office">
+            <span class="click-hint">👆 Click to view</span>
+            <img src="https://picsum.photos/600/400?random=333" alt="Executive Suite">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
                     <h3>Executive Suite</h3>
@@ -523,8 +751,10 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
             </div>
         </div>
         
-        <div class="portfolio-item" data-category="interior">
+        <!-- INTERIOR PROJECTS -->
+        <div class="portfolio-item" data-category="interior" onclick="openLightbox(12)">
             <div class="portfolio-cat-badge">Interior</div>
+            <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=341" alt="Luxury Villa Interior">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
@@ -534,8 +764,9 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
                 </div>
             </div>
         </div>
-        <div class="portfolio-item" data-category="interior">
+        <div class="portfolio-item" data-category="interior" onclick="openLightbox(13)">
             <div class="portfolio-cat-badge">Interior</div>
+            <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=342" alt="Vaikadum Villasa">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
@@ -545,9 +776,10 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
                 </div>
             </div>
         </div>
-        <div class="portfolio-item" data-category="interior">
+        <div class="portfolio-item" data-category="interior" onclick="openLightbox(14)">
             <div class="portfolio-cat-badge">Interior</div>
-            <img src="https://picsum.photos/600/400?random=343" alt="Modern Apartment">
+            <span class="click-hint">👆 Click to view</span>
+            <img src="https://picsum.photos/600/400?random=343" alt="Sky Apartment">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
                     <h3>Sky Apartment</h3>
@@ -557,8 +789,10 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
             </div>
         </div>
         
-        <div class="portfolio-item" data-category="landscape">
+        <!-- LANDSCAPE PROJECTS -->
+        <div class="portfolio-item" data-category="landscape" onclick="openLightbox(15)">
             <div class="portfolio-cat-badge">Landscape</div>
+            <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=351" alt="Villa Garden">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
@@ -568,8 +802,9 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
                 </div>
             </div>
         </div>
-        <div class="portfolio-item" data-category="landscape">
+        <div class="portfolio-item" data-category="landscape" onclick="openLightbox(16)">
             <div class="portfolio-cat-badge">Landscape</div>
+            <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=352" alt="Farmhouse Landscape">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
@@ -579,9 +814,10 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
                 </div>
             </div>
         </div>
-        <div class="portfolio-item" data-category="landscape">
+        <div class="portfolio-item" data-category="landscape" onclick="openLightbox(17)">
             <div class="portfolio-cat-badge">Landscape</div>
-            <img src="https://picsum.photos/600/400?random=353" alt="Corporate Garden">
+            <span class="click-hint">👆 Click to view</span>
+            <img src="https://picsum.photos/600/400?random=353" alt="Corporate Green Space">
             <div class="portfolio-overlay">
                 <div class="portfolio-info">
                     <h3>Corporate Green Space</h3>
@@ -593,6 +829,27 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
         
     </div>
 </section>
+
+<!-- ========== LIGHTBOX ========== -->
+<div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <div class="lightbox-slider">
+            <div class="lightbox-slides" id="lightboxSlides"></div>
+            <button class="lightbox-arrow prev" onclick="prevSlide()">‹</button>
+            <button class="lightbox-arrow next" onclick="nextSlide()">›</button>
+            <div class="lightbox-dots" id="lightboxDots"></div>
+        </div>
+        <div class="lightbox-info">
+            <div>
+                <div class="lightbox-title" id="lightboxTitle"></div>
+                <div class="lightbox-desc" id="lightboxDesc"></div>
+                <div class="lightbox-location" id="lightboxLocation"></div>
+            </div>
+            <div class="lightbox-counter" id="lightboxCounter"></div>
+        </div>
+    </div>
+</div>
 
 <section class="process" id="process">
     <div class="section-header">
@@ -734,6 +991,334 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
 <button class="back-top" id="backTop">↑</button>
 
 <script>
+// ========== PROJECT DATA WITH MULTIPLE IMAGES ==========
+var projectsData = [
+    // Residential (Index 0-2)
+    {
+        title: "Nehru Nagar Villa",
+        description: "Contemporary luxury living with modern amenities",
+        location: "📍 Ghaziabad",
+        images: [
+            "https://picsum.photos/1200/800?random=301",
+            "https://picsum.photos/1200/800?random=401",
+            "https://picsum.photos/1200/800?random=501"
+        ]
+    },
+    {
+        title: "Landcraft Residence",
+        description: "Modern minimalist home design",
+        location: "📍 Delhi NCR",
+        images: [
+            "https://picsum.photos/1200/800?random=302",
+            "https://picsum.photos/1200/800?random=402",
+            "https://picsum.photos/1200/800?random=502"
+        ]
+    },
+    {
+        title: "Saar Homes",
+        description: "Farmhouse Villa with lush surroundings",
+        location: "📍 Noida",
+        images: [
+            "https://picsum.photos/1200/800?random=303",
+            "https://picsum.photos/1200/800?random=403",
+            "https://picsum.photos/1200/800?random=503"
+        ]
+    },
+    // Commercial (Index 3-5)
+    {
+        title: "Metro Plaza",
+        description: "Modern shopping complex with retail spaces",
+        location: "📍 Ghaziabad",
+        images: [
+            "https://picsum.photos/1200/800?random=311",
+            "https://picsum.photos/1200/800?random=411",
+            "https://picsum.photos/1200/800?random=511"
+        ]
+    },
+    {
+        title: "Trade Tower",
+        description: "Multi-purpose commercial building",
+        location: "📍 Delhi",
+        images: [
+            "https://picsum.photos/1200/800?random=312",
+            "https://picsum.photos/1200/800?random=412",
+            "https://picsum.photos/1200/800?random=512"
+        ]
+    },
+    {
+        title: "Grand Mall",
+        description: "Premium retail and entertainment hub",
+        location: "📍 Noida",
+        images: [
+            "https://picsum.photos/1200/800?random=313",
+            "https://picsum.photos/1200/800?random=413",
+            "https://picsum.photos/1200/800?random=513"
+        ]
+    },
+    // Industrial (Index 6-8)
+    {
+        title: "Swadeshi Polytex Factory",
+        description: "Modern manufacturing facility design",
+        location: "📍 Ghaziabad",
+        images: [
+            "https://picsum.photos/1200/800?random=321",
+            "https://picsum.photos/1200/800?random=421",
+            "https://picsum.photos/1200/800?random=521"
+        ]
+    },
+    {
+        title: "Logistics Warehouse",
+        description: "Large-scale storage and distribution center",
+        location: "📍 Noida",
+        images: [
+            "https://picsum.photos/1200/800?random=322",
+            "https://picsum.photos/1200/800?random=422",
+            "https://picsum.photos/1200/800?random=522"
+        ]
+    },
+    {
+        title: "Industrial Complex",
+        description: "Multi-unit industrial facility",
+        location: "📍 Kavi Nagar",
+        images: [
+            "https://picsum.photos/1200/800?random=323",
+            "https://picsum.photos/1200/800?random=423",
+            "https://picsum.photos/1200/800?random=523"
+        ]
+    },
+    // Office (Index 9-11)
+    {
+        title: "Aquasense Office",
+        description: "Corporate office with modern amenities",
+        location: "📍 Ghaziabad",
+        images: [
+            "https://picsum.photos/1200/800?random=331",
+            "https://picsum.photos/1200/800?random=431",
+            "https://picsum.photos/1200/800?random=531"
+        ]
+    },
+    {
+        title: "Tech Hub Workspace",
+        description: "Contemporary office for IT company",
+        location: "📍 Noida",
+        images: [
+            "https://picsum.photos/1200/800?random=332",
+            "https://picsum.photos/1200/800?random=432",
+            "https://picsum.photos/1200/800?random=532"
+        ]
+    },
+    {
+        title: "Executive Suite",
+        description: "Premium corporate office design",
+        location: "📍 Delhi",
+        images: [
+            "https://picsum.photos/1200/800?random=333",
+            "https://picsum.photos/1200/800?random=433",
+            "https://picsum.photos/1200/800?random=533"
+        ]
+    },
+    // Interior (Index 12-14)
+    {
+        title: "Luxury Villa Interior",
+        description: "Elegant premium finishes and decor",
+        location: "📍 Ghaziabad",
+        images: [
+            "https://picsum.photos/1200/800?random=341",
+            "https://picsum.photos/1200/800?random=441",
+            "https://picsum.photos/1200/800?random=541"
+        ]
+    },
+    {
+        title: "Vaikadum Villasa",
+        description: "Traditional meets modern interior",
+        location: "📍 Delhi NCR",
+        images: [
+            "https://picsum.photos/1200/800?random=342",
+            "https://picsum.photos/1200/800?random=442",
+            "https://picsum.photos/1200/800?random=542"
+        ]
+    },
+    {
+        title: "Sky Apartment",
+        description: "Contemporary apartment interior",
+        location: "📍 Noida",
+        images: [
+            "https://picsum.photos/1200/800?random=343",
+            "https://picsum.photos/1200/800?random=443",
+            "https://picsum.photos/1200/800?random=543"
+        ]
+    },
+    // Landscape (Index 15-17)
+    {
+        title: "Villa Garden Design",
+        description: "Beautifully landscaped outdoor space",
+        location: "📍 Ghaziabad",
+        images: [
+            "https://picsum.photos/1200/800?random=351",
+            "https://picsum.photos/1200/800?random=451",
+            "https://picsum.photos/1200/800?random=551"
+        ]
+    },
+    {
+        title: "Farmhouse Landscape",
+        description: "Extensive garden with water features",
+        location: "📍 Noida",
+        images: [
+            "https://picsum.photos/1200/800?random=352",
+            "https://picsum.photos/1200/800?random=452",
+            "https://picsum.photos/1200/800?random=552"
+        ]
+    },
+    {
+        title: "Corporate Green Space",
+        description: "Office campus landscape design",
+        location: "📍 Delhi",
+        images: [
+            "https://picsum.photos/1200/800?random=353",
+            "https://picsum.photos/1200/800?random=453",
+            "https://picsum.photos/1200/800?random=553"
+        ]
+    }
+];
+
+var currentProject = 0;
+var currentSlide = 0;
+var autoSlideInterval;
+
+// ========== LIGHTBOX FUNCTIONS ==========
+function openLightbox(projectIndex) {
+    currentProject = projectIndex;
+    currentSlide = 0;
+    var project = projectsData[projectIndex];
+    
+    // Set title, description, location
+    document.getElementById('lightboxTitle').textContent = project.title;
+    document.getElementById('lightboxDesc').textContent = project.description;
+    document.getElementById('lightboxLocation').textContent = project.location;
+    
+    // Create slides
+    var slidesContainer = document.getElementById('lightboxSlides');
+    slidesContainer.innerHTML = '';
+    project.images.forEach(function(img, index) {
+        var slide = document.createElement('div');
+        slide.className = 'lightbox-slide' + (index === 0 ? ' active' : '');
+        slide.innerHTML = '<img src="' + img + '" alt="' + project.title + ' ' + (index + 1) + '">';
+        slidesContainer.appendChild(slide);
+    });
+    
+    // Create dots
+    var dotsContainer = document.getElementById('lightboxDots');
+    dotsContainer.innerHTML = '';
+    project.images.forEach(function(_, index) {
+        var dot = document.createElement('div');
+        dot.className = 'lightbox-dot' + (index === 0 ? ' active' : '');
+        dot.onclick = function() { goToSlide(index); };
+        dotsContainer.appendChild(dot);
+    });
+    
+    updateCounter();
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Start auto slide
+    startAutoSlide();
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = 'auto';
+    stopAutoSlide();
+}
+
+function nextSlide() {
+    var project = projectsData[currentProject];
+    currentSlide = (currentSlide + 1) % project.images.length;
+    updateSlides();
+    resetAutoSlide();
+}
+
+function prevSlide() {
+    var project = projectsData[currentProject];
+    currentSlide = (currentSlide - 1 + project.images.length) % project.images.length;
+    updateSlides();
+    resetAutoSlide();
+}
+
+function goToSlide(index) {
+    currentSlide = index;
+    updateSlides();
+    resetAutoSlide();
+}
+
+function updateSlides() {
+    var slides = document.querySelectorAll('.lightbox-slide');
+    var dots = document.querySelectorAll('.lightbox-dot');
+    
+    slides.forEach(function(slide, index) {
+        slide.classList.toggle('active', index === currentSlide);
+    });
+    
+    dots.forEach(function(dot, index) {
+        dot.classList.toggle('active', index === currentSlide);
+    });
+    
+    updateCounter();
+}
+
+function updateCounter() {
+    var project = projectsData[currentProject];
+    document.getElementById('lightboxCounter').textContent = 
+        (currentSlide + 1) + ' / ' + project.images.length;
+}
+
+function startAutoSlide() {
+    autoSlideInterval = setInterval(nextSlide, 4000);
+}
+
+function stopAutoSlide() {
+    clearInterval(autoSlideInterval);
+}
+
+function resetAutoSlide() {
+    stopAutoSlide();
+    startAutoSlide();
+}
+
+// Close lightbox on background click
+document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeLightbox();
+    }
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+    if (document.getElementById('lightbox').classList.contains('active')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'ArrowRight') nextSlide();
+    }
+});
+
+// Touch swipe support
+var touchStartX = 0;
+var touchEndX = 0;
+
+document.getElementById('lightbox').addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+document.getElementById('lightbox').addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    if (touchEndX < touchStartX - 50) nextSlide();
+    if (touchEndX > touchStartX + 50) prevSlide();
+}
+
+// ========== NAVIGATION & OTHER FUNCTIONS ==========
 window.addEventListener('scroll', function() {
     var nav = document.getElementById('nav');
     var backTop = document.getElementById('backTop');
@@ -765,6 +1350,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(link) {
     }); 
 });
 
+// ========== PORTFOLIO FILTER ==========
 document.addEventListener('DOMContentLoaded', function() {
     var filterBtns = document.querySelectorAll('.filter-btn');
     var portfolioItems = document.querySelectorAll('.portfolio-item');
