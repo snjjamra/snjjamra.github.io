@@ -119,11 +119,10 @@ section { padding: 100px 5%; }
 .portfolio-info p { color: rgba(255,255,255,0.8); font-size: 13px; margin-bottom: 4px; }
 .portfolio-info .location { color: #c8a97e; font-size: 12px; letter-spacing: 1px; }
 
-/* Click hint on portfolio items */
 .click-hint { position: absolute; top: 20px; left: 20px; background: rgba(0,0,0,0.7); color: white; padding: 8px 14px; border-radius: 20px; font-size: 11px; opacity: 0; transition: 0.3s; z-index: 2; letter-spacing: 1px; }
 .portfolio-item:hover .click-hint { opacity: 1; }
 
-/* ========== LIGHTBOX STYLES ========== */
+/* ========== LIGHTBOX - LARGER LANDSCAPE MODE ========== */
 .lightbox {
     position: fixed;
     top: 0;
@@ -150,8 +149,9 @@ section { padding: 100px 5%; }
 
 .lightbox-content {
     position: relative;
-    max-width: 90%;
-    max-height: 90vh;
+    width: 95%;
+    max-width: 1400px;
+    max-height: 95vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -163,11 +163,12 @@ section { padding: 100px 5%; }
     to { transform: scale(1); opacity: 1; }
 }
 
+/* WIDER LANDSCAPE SLIDER */
 .lightbox-slider {
     position: relative;
     width: 100%;
-    max-width: 1000px;
-    height: 70vh;
+    aspect-ratio: 16 / 9;
+    max-height: 75vh;
     overflow: hidden;
     border-radius: 10px;
     background: #000;
@@ -197,17 +198,15 @@ section { padding: 100px 5%; }
 .lightbox-slide img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    background: #000;
+    object-fit: cover;
 }
 
-/* Navigation Arrows */
 .lightbox-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     background: rgba(255,255,255,0.15);
     border: 2px solid rgba(255,255,255,0.3);
     color: white;
@@ -216,7 +215,7 @@ section { padding: 100px 5%; }
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
+    font-size: 28px;
     transition: 0.3s;
     z-index: 10;
     backdrop-filter: blur(10px);
@@ -231,7 +230,6 @@ section { padding: 100px 5%; }
 .lightbox-arrow.prev { left: 20px; }
 .lightbox-arrow.next { right: 20px; }
 
-/* Close Button */
 .lightbox-close {
     position: absolute;
     top: -50px;
@@ -249,6 +247,7 @@ section { padding: 100px 5%; }
     justify-content: center;
     transition: 0.3s;
     backdrop-filter: blur(10px);
+    z-index: 20;
 }
 
 .lightbox-close:hover {
@@ -257,13 +256,11 @@ section { padding: 100px 5%; }
     transform: rotate(90deg);
 }
 
-/* Info Bar */
 .lightbox-info {
     background: white;
     padding: 20px 30px;
     border-radius: 0 0 10px 10px;
     width: 100%;
-    max-width: 1000px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -273,14 +270,14 @@ section { padding: 100px 5%; }
 
 .lightbox-title {
     font-family: 'Playfair Display', serif;
-    font-size: 22px;
+    font-size: 24px;
     color: #1a1a1a;
     font-weight: 600;
 }
 
 .lightbox-desc {
     color: #666;
-    font-size: 13px;
+    font-size: 14px;
     margin-top: 3px;
 }
 
@@ -293,15 +290,14 @@ section { padding: 100px 5%; }
 
 .lightbox-counter {
     background: #f8f6f3;
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 10px 20px;
+    border-radius: 25px;
     color: #c8a97e;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 1px;
 }
 
-/* Dots */
 .lightbox-dots {
     position: absolute;
     bottom: 20px;
@@ -313,8 +309,8 @@ section { padding: 100px 5%; }
 }
 
 .lightbox-dot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     background: rgba(255,255,255,0.4);
     border-radius: 50%;
     cursor: pointer;
@@ -323,8 +319,8 @@ section { padding: 100px 5%; }
 
 .lightbox-dot.active {
     background: #c8a97e;
-    width: 30px;
-    border-radius: 5px;
+    width: 35px;
+    border-radius: 6px;
 }
 
 .process { background: white; }
@@ -334,16 +330,149 @@ section { padding: 100px 5%; }
 .process-step h3 { font-family: 'Playfair Display', serif; font-size: 18px; color: #1a1a1a; margin-bottom: 12px; }
 .process-step p { color: #888; font-size: 13px; line-height: 1.7; }
 
-.testimonials { background: #1a1a1a; color: white; }
+/* ========== TESTIMONIALS SLIDESHOW ========== */
+.testimonials { background: #1a1a1a; color: white; position: relative; overflow: hidden; }
 .testimonials .section-title { color: white; }
 .testimonials .section-subtitle { color: #888; }
-.testimonial-card { max-width: 800px; margin: 0 auto; text-align: center; padding: 40px 20px; }
-.stars { color: #c8a97e; margin-bottom: 25px; font-size: 20px; }
-.testimonial-text { font-family: 'Playfair Display', serif; font-size: 22px; font-style: italic; color: rgba(255,255,255,0.85); margin-bottom: 30px; line-height: 1.7; }
-.testimonial-author { display: flex; align-items: center; justify-content: center; gap: 15px; }
-.author-avatar { width: 55px; height: 55px; border-radius: 50%; background: #c8a97e; color: #1a1a1a; display: flex; align-items: center; justify-content: center; font-weight: 700; }
-.author-info h4 { color: white; margin-bottom: 3px; font-family: 'Playfair Display', serif; }
-.author-info span { color: #c8a97e; font-size: 13px; }
+
+.testimonials-slider {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    min-height: 350px;
+}
+
+.testimonial-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 40px 20px;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+}
+
+.testimonial-slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    position: relative;
+}
+
+.stars {
+    color: #c8a97e;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+.testimonial-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-style: italic;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 35px;
+    line-height: 1.7;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.author-avatar {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c8a97e, #8b7355);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 20px;
+    border: 3px solid #c8a97e;
+}
+
+.author-info h4 {
+    color: white;
+    margin-bottom: 5px;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    text-align: left;
+}
+
+.author-info span {
+    color: #c8a97e;
+    font-size: 13px;
+    text-align: left;
+    display: block;
+}
+
+/* Navigation Dots */
+.testimonial-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+.testimonial-dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+    border: none;
+    padding: 0;
+}
+
+.testimonial-dot.active {
+    background: #c8a97e;
+    width: 35px;
+    border-radius: 6px;
+}
+
+.testimonial-dot:hover {
+    background: rgba(200,169,126,0.6);
+}
+
+/* Arrow Buttons */
+.testimonial-arrow {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.2);
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    transition: 0.3s;
+    z-index: 10;
+}
+
+.testimonial-arrow:hover {
+    background: #c8a97e;
+    border-color: #c8a97e;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.testimonial-arrow.prev { left: -70px; }
+.testimonial-arrow.next { right: -70px; }
 
 .cta { padding: 100px 5%; background: linear-gradient(rgba(26,26,26,0.9), rgba(26,26,26,0.9)), url('https://picsum.photos/1920/1080?random=2') center/cover fixed; text-align: center; color: white; }
 .cta h2 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 42px); margin-bottom: 15px; }
@@ -390,8 +519,9 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
     .footer-grid { grid-template-columns: repeat(2, 1fr); }
     .founders-grid { grid-template-columns: 1fr; }
     .team-grid { grid-template-columns: repeat(2, 1fr); }
-    .lightbox-slider { height: 50vh; }
     .lightbox-info { flex-direction: column; text-align: center; }
+    .testimonial-arrow { display: none; }
+    .testimonial-text { font-size: 20px; }
 }
 @media (max-width: 640px) {
     nav { padding: 15px 20px; }
@@ -410,6 +540,9 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
     .lightbox-arrow { width: 45px; height: 45px; font-size: 20px; }
     .lightbox-arrow.prev { left: 10px; }
     .lightbox-arrow.next { right: 10px; }
+    .testimonial-text { font-size: 18px; }
+    .testimonial-author { flex-direction: column; }
+    .author-info h4, .author-info span { text-align: center; }
 }
 </style>
 </head>
@@ -574,263 +707,128 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
     </div>
     
     <div class="portfolio-filters">
-        <button class="filter-btn active" data-filter="all">
-            <span class="filter-icon">🎨</span> All Projects
-        </button>
-        <button class="filter-btn" data-filter="residential">
-            <span class="filter-icon">🏠</span> Residential
-        </button>
-        <button class="filter-btn" data-filter="commercial">
-            <span class="filter-icon">🏢</span> Commercial
-        </button>
-        <button class="filter-btn" data-filter="industrial">
-            <span class="filter-icon">🏭</span> Industrial
-        </button>
-        <button class="filter-btn" data-filter="office">
-            <span class="filter-icon">💼</span> Office
-        </button>
-        <button class="filter-btn" data-filter="interior">
-            <span class="filter-icon">🛋️</span> Interior
-        </button>
-        <button class="filter-btn" data-filter="landscape">
-            <span class="filter-icon">🌳</span> Landscape
-        </button>
+        <button class="filter-btn active" data-filter="all"><span class="filter-icon">🎨</span> All Projects</button>
+        <button class="filter-btn" data-filter="residential"><span class="filter-icon">🏠</span> Residential</button>
+        <button class="filter-btn" data-filter="commercial"><span class="filter-icon">🏢</span> Commercial</button>
+        <button class="filter-btn" data-filter="industrial"><span class="filter-icon">🏭</span> Industrial</button>
+        <button class="filter-btn" data-filter="office"><span class="filter-icon">💼</span> Office</button>
+        <button class="filter-btn" data-filter="interior"><span class="filter-icon">🛋️</span> Interior</button>
+        <button class="filter-btn" data-filter="landscape"><span class="filter-icon">🌳</span> Landscape</button>
     </div>
     
     <div class="portfolio-grid" id="portfolioGrid">
-        
-        <!-- RESIDENTIAL PROJECTS -->
         <div class="portfolio-item" data-category="residential" onclick="openLightbox(0)">
             <div class="portfolio-cat-badge">Residential</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=301" alt="Nehru Nagar Villa">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Nehru Nagar Villa</h3>
-                    <p>Contemporary luxury living with modern amenities</p>
-                    <p class="location">📍 Ghaziabad</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Nehru Nagar Villa</h3><p>Contemporary luxury living with modern amenities</p><p class="location">📍 Ghaziabad</p></div></div>
         </div>
         <div class="portfolio-item" data-category="residential" onclick="openLightbox(1)">
             <div class="portfolio-cat-badge">Residential</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=302" alt="Landcraft Residence">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Landcraft Residence</h3>
-                    <p>Modern minimalist home design</p>
-                    <p class="location">📍 Delhi NCR</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Landcraft Residence</h3><p>Modern minimalist home design</p><p class="location">📍 Delhi NCR</p></div></div>
         </div>
         <div class="portfolio-item" data-category="residential" onclick="openLightbox(2)">
             <div class="portfolio-cat-badge">Residential</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=303" alt="Saar Homes">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Saar Homes</h3>
-                    <p>Farmhouse Villa with lush surroundings</p>
-                    <p class="location">📍 Noida</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Saar Homes</h3><p>Farmhouse Villa with lush surroundings</p><p class="location">📍 Noida</p></div></div>
         </div>
-        
-        <!-- COMMERCIAL PROJECTS -->
         <div class="portfolio-item" data-category="commercial" onclick="openLightbox(3)">
             <div class="portfolio-cat-badge">Commercial</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=311" alt="Metro Plaza">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Metro Plaza</h3>
-                    <p>Modern shopping complex with retail spaces</p>
-                    <p class="location">📍 Ghaziabad</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Metro Plaza</h3><p>Modern shopping complex with retail spaces</p><p class="location">📍 Ghaziabad</p></div></div>
         </div>
         <div class="portfolio-item" data-category="commercial" onclick="openLightbox(4)">
             <div class="portfolio-cat-badge">Commercial</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=312" alt="Trade Tower">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Trade Tower</h3>
-                    <p>Multi-purpose commercial building</p>
-                    <p class="location">📍 Delhi</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Trade Tower</h3><p>Multi-purpose commercial building</p><p class="location">📍 Delhi</p></div></div>
         </div>
         <div class="portfolio-item" data-category="commercial" onclick="openLightbox(5)">
             <div class="portfolio-cat-badge">Commercial</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=313" alt="Grand Mall">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Grand Mall</h3>
-                    <p>Premium retail and entertainment hub</p>
-                    <p class="location">📍 Noida</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Grand Mall</h3><p>Premium retail and entertainment hub</p><p class="location">📍 Noida</p></div></div>
         </div>
-        
-        <!-- INDUSTRIAL PROJECTS -->
         <div class="portfolio-item" data-category="industrial" onclick="openLightbox(6)">
             <div class="portfolio-cat-badge">Industrial</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=321" alt="Swadeshi Polytex Factory">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Swadeshi Polytex Factory</h3>
-                    <p>Modern manufacturing facility design</p>
-                    <p class="location">📍 Ghaziabad</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Swadeshi Polytex Factory</h3><p>Modern manufacturing facility design</p><p class="location">📍 Ghaziabad</p></div></div>
         </div>
         <div class="portfolio-item" data-category="industrial" onclick="openLightbox(7)">
             <div class="portfolio-cat-badge">Industrial</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=322" alt="Logistics Warehouse">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Logistics Warehouse</h3>
-                    <p>Large-scale storage and distribution center</p>
-                    <p class="location">📍 Noida</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Logistics Warehouse</h3><p>Large-scale storage and distribution center</p><p class="location">📍 Noida</p></div></div>
         </div>
         <div class="portfolio-item" data-category="industrial" onclick="openLightbox(8)">
             <div class="portfolio-cat-badge">Industrial</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=323" alt="Industrial Complex">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Industrial Complex</h3>
-                    <p>Multi-unit industrial facility</p>
-                    <p class="location">📍 Kavi Nagar</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Industrial Complex</h3><p>Multi-unit industrial facility</p><p class="location">📍 Kavi Nagar</p></div></div>
         </div>
-        
-        <!-- OFFICE PROJECTS -->
         <div class="portfolio-item" data-category="office" onclick="openLightbox(9)">
             <div class="portfolio-cat-badge">Office</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=331" alt="Aquasense Office">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Aquasense Office</h3>
-                    <p>Corporate office with modern amenities</p>
-                    <p class="location">📍 Ghaziabad</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Aquasense Office</h3><p>Corporate office with modern amenities</p><p class="location">📍 Ghaziabad</p></div></div>
         </div>
         <div class="portfolio-item" data-category="office" onclick="openLightbox(10)">
             <div class="portfolio-cat-badge">Office</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=332" alt="Tech Hub">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Tech Hub Workspace</h3>
-                    <p>Contemporary office for IT company</p>
-                    <p class="location">📍 Noida</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Tech Hub Workspace</h3><p>Contemporary office for IT company</p><p class="location">📍 Noida</p></div></div>
         </div>
         <div class="portfolio-item" data-category="office" onclick="openLightbox(11)">
             <div class="portfolio-cat-badge">Office</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=333" alt="Executive Suite">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Executive Suite</h3>
-                    <p>Premium corporate office design</p>
-                    <p class="location">📍 Delhi</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Executive Suite</h3><p>Premium corporate office design</p><p class="location">📍 Delhi</p></div></div>
         </div>
-        
-        <!-- INTERIOR PROJECTS -->
         <div class="portfolio-item" data-category="interior" onclick="openLightbox(12)">
             <div class="portfolio-cat-badge">Interior</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=341" alt="Luxury Villa Interior">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Luxury Villa Interior</h3>
-                    <p>Elegant premium finishes and decor</p>
-                    <p class="location">📍 Ghaziabad</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Luxury Villa Interior</h3><p>Elegant premium finishes and decor</p><p class="location">📍 Ghaziabad</p></div></div>
         </div>
         <div class="portfolio-item" data-category="interior" onclick="openLightbox(13)">
             <div class="portfolio-cat-badge">Interior</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=342" alt="Vaikadum Villasa">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Vaikadum Villasa</h3>
-                    <p>Traditional meets modern interior</p>
-                    <p class="location">📍 Delhi NCR</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Vaikadum Villasa</h3><p>Traditional meets modern interior</p><p class="location">📍 Delhi NCR</p></div></div>
         </div>
         <div class="portfolio-item" data-category="interior" onclick="openLightbox(14)">
             <div class="portfolio-cat-badge">Interior</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=343" alt="Sky Apartment">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Sky Apartment</h3>
-                    <p>Contemporary apartment interior</p>
-                    <p class="location">📍 Noida</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Sky Apartment</h3><p>Contemporary apartment interior</p><p class="location">📍 Noida</p></div></div>
         </div>
-        
-        <!-- LANDSCAPE PROJECTS -->
         <div class="portfolio-item" data-category="landscape" onclick="openLightbox(15)">
             <div class="portfolio-cat-badge">Landscape</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=351" alt="Villa Garden">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Villa Garden Design</h3>
-                    <p>Beautifully landscaped outdoor space</p>
-                    <p class="location">📍 Ghaziabad</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Villa Garden Design</h3><p>Beautifully landscaped outdoor space</p><p class="location">📍 Ghaziabad</p></div></div>
         </div>
         <div class="portfolio-item" data-category="landscape" onclick="openLightbox(16)">
             <div class="portfolio-cat-badge">Landscape</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=352" alt="Farmhouse Landscape">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Farmhouse Landscape</h3>
-                    <p>Extensive garden with water features</p>
-                    <p class="location">📍 Noida</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Farmhouse Landscape</h3><p>Extensive garden with water features</p><p class="location">📍 Noida</p></div></div>
         </div>
         <div class="portfolio-item" data-category="landscape" onclick="openLightbox(17)">
             <div class="portfolio-cat-badge">Landscape</div>
             <span class="click-hint">👆 Click to view</span>
             <img src="https://picsum.photos/600/400?random=353" alt="Corporate Green Space">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h3>Corporate Green Space</h3>
-                    <p>Office campus landscape design</p>
-                    <p class="location">📍 Delhi</p>
-                </div>
-            </div>
+            <div class="portfolio-overlay"><div class="portfolio-info"><h3>Corporate Green Space</h3><p>Office campus landscape design</p><p class="location">📍 Delhi</p></div></div>
         </div>
-        
     </div>
 </section>
 
-<!-- ========== LIGHTBOX ========== -->
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
     <div class="lightbox-content">
         <button class="lightbox-close" onclick="closeLightbox()">✕</button>
@@ -866,21 +864,64 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
     </div>
 </section>
 
+<!-- ========== TESTIMONIALS WITH SLIDESHOW ========== -->
 <section class="testimonials">
     <div class="section-header">
         <span class="section-tag">Client Reviews</span>
         <h2 class="section-title">What Our <span>Clients Say</span></h2>
+        <p class="section-subtitle">Trusted by clients across residential and commercial projects</p>
     </div>
-    <div class="testimonial-card">
-        <div class="stars">★ ★ ★ ★ ★</div>
-        <p class="testimonial-text">"Art Designs transformed our vision into reality. Their attention to detail and innovative approach resulted in a home that exceeded all our expectations."</p>
-        <div class="testimonial-author">
-            <div class="author-avatar">SG</div>
-            <div class="author-info">
-                <h4>Sumesh Garg</h4>
-                <span>A1 Landcraft, Villa Project</span>
+    
+    <div class="testimonials-slider" id="testimonialsSlider">
+        <!-- Arrow Buttons -->
+        <button class="testimonial-arrow prev" onclick="prevTestimonial()">‹</button>
+        <button class="testimonial-arrow next" onclick="nextTestimonial()">›</button>
+        
+        <!-- Testimonial 1 -->
+        <div class="testimonial-slide active">
+            <div class="stars">★ ★ ★ ★ ★</div>
+            <p class="testimonial-text">"Art Designs transformed our vision into reality. Their attention to detail and innovative approach resulted in a home that exceeded all our expectations. Highly professional team!"</p>
+            <div class="testimonial-author">
+                <div class="author-avatar">SG</div>
+                <div class="author-info">
+                    <h4>Sumesh Garg</h4>
+                    <span>A1 Landcraft, Villa Project</span>
+                </div>
             </div>
         </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="testimonial-slide">
+            <div class="stars">★ ★ ★ ★ ★</div>
+            <p class="testimonial-text">"Working with Tarun and Sanjay was a wonderful experience. They understood our commercial requirements perfectly and delivered a stunning office space that has become the talk of the town."</p>
+            <div class="testimonial-author">
+                <div class="author-avatar">RK</div>
+                <div class="author-info">
+                    <h4>Rajesh Kumar</h4>
+                    <span>CEO, Aquasense Ltd.</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="testimonial-slide">
+            <div class="stars">★ ★ ★ ★ ★</div>
+            <p class="testimonial-text">"The team at Art Designs delivered our farmhouse project on time and within budget. Their landscape design is breathtaking. We couldn't be happier with the final result. Highly recommended!"</p>
+            <div class="testimonial-author">
+                <div class="author-avatar">PM</div>
+                <div class="author-info">
+                    <h4>Priya Mehta</h4>
+                    <span>Saar Homes, Farmhouse Project</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation Dots -->
+    <div class="testimonial-nav">
+        <button class="testimonial-dot active" onclick="goToTestimonial(0)"></button>
+        <button class="testimonial-dot" onclick="goToTestimonial(1)"></button>
+        <button class="testimonial-dot" onclick="goToTestimonial(2)"></button>
     </div>
 </section>
 
@@ -991,194 +1032,26 @@ footer { background: #1a1a1a; color: rgba(255,255,255,0.6); padding: 60px 5% 20p
 <button class="back-top" id="backTop">↑</button>
 
 <script>
-// ========== PROJECT DATA WITH MULTIPLE IMAGES ==========
+// ========== PROJECT DATA WITH LANDSCAPE IMAGES ==========
 var projectsData = [
-    // Residential (Index 0-2)
-    {
-        title: "Nehru Nagar Villa",
-        description: "Contemporary luxury living with modern amenities",
-        location: "📍 Ghaziabad",
-        images: [
-            "https://picsum.photos/1200/800?random=301",
-            "https://picsum.photos/1200/800?random=401",
-            "https://picsum.photos/1200/800?random=501"
-        ]
-    },
-    {
-        title: "Landcraft Residence",
-        description: "Modern minimalist home design",
-        location: "📍 Delhi NCR",
-        images: [
-            "https://picsum.photos/1200/800?random=302",
-            "https://picsum.photos/1200/800?random=402",
-            "https://picsum.photos/1200/800?random=502"
-        ]
-    },
-    {
-        title: "Saar Homes",
-        description: "Farmhouse Villa with lush surroundings",
-        location: "📍 Noida",
-        images: [
-            "https://picsum.photos/1200/800?random=303",
-            "https://picsum.photos/1200/800?random=403",
-            "https://picsum.photos/1200/800?random=503"
-        ]
-    },
-    // Commercial (Index 3-5)
-    {
-        title: "Metro Plaza",
-        description: "Modern shopping complex with retail spaces",
-        location: "📍 Ghaziabad",
-        images: [
-            "https://picsum.photos/1200/800?random=311",
-            "https://picsum.photos/1200/800?random=411",
-            "https://picsum.photos/1200/800?random=511"
-        ]
-    },
-    {
-        title: "Trade Tower",
-        description: "Multi-purpose commercial building",
-        location: "📍 Delhi",
-        images: [
-            "https://picsum.photos/1200/800?random=312",
-            "https://picsum.photos/1200/800?random=412",
-            "https://picsum.photos/1200/800?random=512"
-        ]
-    },
-    {
-        title: "Grand Mall",
-        description: "Premium retail and entertainment hub",
-        location: "📍 Noida",
-        images: [
-            "https://picsum.photos/1200/800?random=313",
-            "https://picsum.photos/1200/800?random=413",
-            "https://picsum.photos/1200/800?random=513"
-        ]
-    },
-    // Industrial (Index 6-8)
-    {
-        title: "Swadeshi Polytex Factory",
-        description: "Modern manufacturing facility design",
-        location: "📍 Ghaziabad",
-        images: [
-            "https://picsum.photos/1200/800?random=321",
-            "https://picsum.photos/1200/800?random=421",
-            "https://picsum.photos/1200/800?random=521"
-        ]
-    },
-    {
-        title: "Logistics Warehouse",
-        description: "Large-scale storage and distribution center",
-        location: "📍 Noida",
-        images: [
-            "https://picsum.photos/1200/800?random=322",
-            "https://picsum.photos/1200/800?random=422",
-            "https://picsum.photos/1200/800?random=522"
-        ]
-    },
-    {
-        title: "Industrial Complex",
-        description: "Multi-unit industrial facility",
-        location: "📍 Kavi Nagar",
-        images: [
-            "https://picsum.photos/1200/800?random=323",
-            "https://picsum.photos/1200/800?random=423",
-            "https://picsum.photos/1200/800?random=523"
-        ]
-    },
-    // Office (Index 9-11)
-    {
-        title: "Aquasense Office",
-        description: "Corporate office with modern amenities",
-        location: "📍 Ghaziabad",
-        images: [
-            "https://picsum.photos/1200/800?random=331",
-            "https://picsum.photos/1200/800?random=431",
-            "https://picsum.photos/1200/800?random=531"
-        ]
-    },
-    {
-        title: "Tech Hub Workspace",
-        description: "Contemporary office for IT company",
-        location: "📍 Noida",
-        images: [
-            "https://picsum.photos/1200/800?random=332",
-            "https://picsum.photos/1200/800?random=432",
-            "https://picsum.photos/1200/800?random=532"
-        ]
-    },
-    {
-        title: "Executive Suite",
-        description: "Premium corporate office design",
-        location: "📍 Delhi",
-        images: [
-            "https://picsum.photos/1200/800?random=333",
-            "https://picsum.photos/1200/800?random=433",
-            "https://picsum.photos/1200/800?random=533"
-        ]
-    },
-    // Interior (Index 12-14)
-    {
-        title: "Luxury Villa Interior",
-        description: "Elegant premium finishes and decor",
-        location: "📍 Ghaziabad",
-        images: [
-            "https://picsum.photos/1200/800?random=341",
-            "https://picsum.photos/1200/800?random=441",
-            "https://picsum.photos/1200/800?random=541"
-        ]
-    },
-    {
-        title: "Vaikadum Villasa",
-        description: "Traditional meets modern interior",
-        location: "📍 Delhi NCR",
-        images: [
-            "https://picsum.photos/1200/800?random=342",
-            "https://picsum.photos/1200/800?random=442",
-            "https://picsum.photos/1200/800?random=542"
-        ]
-    },
-    {
-        title: "Sky Apartment",
-        description: "Contemporary apartment interior",
-        location: "📍 Noida",
-        images: [
-            "https://picsum.photos/1200/800?random=343",
-            "https://picsum.photos/1200/800?random=443",
-            "https://picsum.photos/1200/800?random=543"
-        ]
-    },
-    // Landscape (Index 15-17)
-    {
-        title: "Villa Garden Design",
-        description: "Beautifully landscaped outdoor space",
-        location: "📍 Ghaziabad",
-        images: [
-            "https://picsum.photos/1200/800?random=351",
-            "https://picsum.photos/1200/800?random=451",
-            "https://picsum.photos/1200/800?random=551"
-        ]
-    },
-    {
-        title: "Farmhouse Landscape",
-        description: "Extensive garden with water features",
-        location: "📍 Noida",
-        images: [
-            "https://picsum.photos/1200/800?random=352",
-            "https://picsum.photos/1200/800?random=452",
-            "https://picsum.photos/1200/800?random=552"
-        ]
-    },
-    {
-        title: "Corporate Green Space",
-        description: "Office campus landscape design",
-        location: "📍 Delhi",
-        images: [
-            "https://picsum.photos/1200/800?random=353",
-            "https://picsum.photos/1200/800?random=453",
-            "https://picsum.photos/1200/800?random=553"
-        ]
-    }
+    {title:"Nehru Nagar Villa", description:"Contemporary luxury living with modern amenities", location:"📍 Ghaziabad", images:["https://picsum.photos/1600/900?random=301","https://picsum.photos/1600/900?random=401","https://picsum.photos/1600/900?random=501"]},
+    {title:"Landcraft Residence", description:"Modern minimalist home design", location:"📍 Delhi NCR", images:["https://picsum.photos/1600/900?random=302","https://picsum.photos/1600/900?random=402","https://picsum.photos/1600/900?random=502"]},
+    {title:"Saar Homes", description:"Farmhouse Villa with lush surroundings", location:"📍 Noida", images:["https://picsum.photos/1600/900?random=303","https://picsum.photos/1600/900?random=403","https://picsum.photos/1600/900?random=503"]},
+    {title:"Metro Plaza", description:"Modern shopping complex with retail spaces", location:"📍 Ghaziabad", images:["https://picsum.photos/1600/900?random=311","https://picsum.photos/1600/900?random=411","https://picsum.photos/1600/900?random=511"]},
+    {title:"Trade Tower", description:"Multi-purpose commercial building", location:"📍 Delhi", images:["https://picsum.photos/1600/900?random=312","https://picsum.photos/1600/900?random=412","https://picsum.photos/1600/900?random=512"]},
+    {title:"Grand Mall", description:"Premium retail and entertainment hub", location:"📍 Noida", images:["https://picsum.photos/1600/900?random=313","https://picsum.photos/1600/900?random=413","https://picsum.photos/1600/900?random=513"]},
+    {title:"Swadeshi Polytex Factory", description:"Modern manufacturing facility design", location:"📍 Ghaziabad", images:["https://picsum.photos/1600/900?random=321","https://picsum.photos/1600/900?random=421","https://picsum.photos/1600/900?random=521"]},
+    {title:"Logistics Warehouse", description:"Large-scale storage and distribution center", location:"📍 Noida", images:["https://picsum.photos/1600/900?random=322","https://picsum.photos/1600/900?random=422","https://picsum.photos/1600/900?random=522"]},
+    {title:"Industrial Complex", description:"Multi-unit industrial facility", location:"📍 Kavi Nagar", images:["https://picsum.photos/1600/900?random=323","https://picsum.photos/1600/900?random=423","https://picsum.photos/1600/900?random=523"]},
+    {title:"Aquasense Office", description:"Corporate office with modern amenities", location:"📍 Ghaziabad", images:["https://picsum.photos/1600/900?random=331","https://picsum.photos/1600/900?random=431","https://picsum.photos/1600/900?random=531"]},
+    {title:"Tech Hub Workspace", description:"Contemporary office for IT company", location:"📍 Noida", images:["https://picsum.photos/1600/900?random=332","https://picsum.photos/1600/900?random=432","https://picsum.photos/1600/900?random=532"]},
+    {title:"Executive Suite", description:"Premium corporate office design", location:"📍 Delhi", images:["https://picsum.photos/1600/900?random=333","https://picsum.photos/1600/900?random=433","https://picsum.photos/1600/900?random=533"]},
+    {title:"Luxury Villa Interior", description:"Elegant premium finishes and decor", location:"📍 Ghaziabad", images:["https://picsum.photos/1600/900?random=341","https://picsum.photos/1600/900?random=441","https://picsum.photos/1600/900?random=541"]},
+    {title:"Vaikadum Villasa", description:"Traditional meets modern interior", location:"📍 Delhi NCR", images:["https://picsum.photos/1600/900?random=342","https://picsum.photos/1600/900?random=442","https://picsum.photos/1600/900?random=542"]},
+    {title:"Sky Apartment", description:"Contemporary apartment interior", location:"📍 Noida", images:["https://picsum.photos/1600/900?random=343","https://picsum.photos/1600/900?random=443","https://picsum.photos/1600/900?random=543"]},
+    {title:"Villa Garden Design", description:"Beautifully landscaped outdoor space", location:"📍 Ghaziabad", images:["https://picsum.photos/1600/900?random=351","https://picsum.photos/1600/900?random=451","https://picsum.photos/1600/900?random=551"]},
+    {title:"Farmhouse Landscape", description:"Extensive garden with water features", location:"📍 Noida", images:["https://picsum.photos/1600/900?random=352","https://picsum.photos/1600/900?random=452","https://picsum.photos/1600/900?random=552"]},
+    {title:"Corporate Green Space", description:"Office campus landscape design", location:"📍 Delhi", images:["https://picsum.photos/1600/900?random=353","https://picsum.photos/1600/900?random=453","https://picsum.photos/1600/900?random=553"]}
 ];
 
 var currentProject = 0;
@@ -1191,12 +1064,10 @@ function openLightbox(projectIndex) {
     currentSlide = 0;
     var project = projectsData[projectIndex];
     
-    // Set title, description, location
     document.getElementById('lightboxTitle').textContent = project.title;
     document.getElementById('lightboxDesc').textContent = project.description;
     document.getElementById('lightboxLocation').textContent = project.location;
     
-    // Create slides
     var slidesContainer = document.getElementById('lightboxSlides');
     slidesContainer.innerHTML = '';
     project.images.forEach(function(img, index) {
@@ -1206,7 +1077,6 @@ function openLightbox(projectIndex) {
         slidesContainer.appendChild(slide);
     });
     
-    // Create dots
     var dotsContainer = document.getElementById('lightboxDots');
     dotsContainer.innerHTML = '';
     project.images.forEach(function(_, index) {
@@ -1219,8 +1089,6 @@ function openLightbox(projectIndex) {
     updateCounter();
     document.getElementById('lightbox').classList.add('active');
     document.body.style.overflow = 'hidden';
-    
-    // Start auto slide
     startAutoSlide();
 }
 
@@ -1253,45 +1121,24 @@ function goToSlide(index) {
 function updateSlides() {
     var slides = document.querySelectorAll('.lightbox-slide');
     var dots = document.querySelectorAll('.lightbox-dot');
-    
-    slides.forEach(function(slide, index) {
-        slide.classList.toggle('active', index === currentSlide);
-    });
-    
-    dots.forEach(function(dot, index) {
-        dot.classList.toggle('active', index === currentSlide);
-    });
-    
+    slides.forEach(function(slide, index) { slide.classList.toggle('active', index === currentSlide); });
+    dots.forEach(function(dot, index) { dot.classList.toggle('active', index === currentSlide); });
     updateCounter();
 }
 
 function updateCounter() {
     var project = projectsData[currentProject];
-    document.getElementById('lightboxCounter').textContent = 
-        (currentSlide + 1) + ' / ' + project.images.length;
+    document.getElementById('lightboxCounter').textContent = (currentSlide + 1) + ' / ' + project.images.length;
 }
 
-function startAutoSlide() {
-    autoSlideInterval = setInterval(nextSlide, 4000);
-}
+function startAutoSlide() { autoSlideInterval = setInterval(nextSlide, 4000); }
+function stopAutoSlide() { clearInterval(autoSlideInterval); }
+function resetAutoSlide() { stopAutoSlide(); startAutoSlide(); }
 
-function stopAutoSlide() {
-    clearInterval(autoSlideInterval);
-}
-
-function resetAutoSlide() {
-    stopAutoSlide();
-    startAutoSlide();
-}
-
-// Close lightbox on background click
 document.getElementById('lightbox').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeLightbox();
-    }
+    if (e.target === this) closeLightbox();
 });
 
-// Keyboard navigation
 document.addEventListener('keydown', function(e) {
     if (document.getElementById('lightbox').classList.contains('active')) {
         if (e.key === 'Escape') closeLightbox();
@@ -1300,25 +1147,67 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Touch swipe support
 var touchStartX = 0;
 var touchEndX = 0;
-
-document.getElementById('lightbox').addEventListener('touchstart', function(e) {
-    touchStartX = e.changedTouches[0].screenX;
-});
-
-document.getElementById('lightbox').addEventListener('touchend', function(e) {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-});
-
+document.getElementById('lightbox').addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; });
+document.getElementById('lightbox').addEventListener('touchend', function(e) { touchEndX = e.changedTouches[0].screenX; handleSwipe(); });
 function handleSwipe() {
     if (touchEndX < touchStartX - 50) nextSlide();
     if (touchEndX > touchStartX + 50) prevSlide();
 }
 
-// ========== NAVIGATION & OTHER FUNCTIONS ==========
+// ========== TESTIMONIAL SLIDESHOW ==========
+var currentTestimonial = 0;
+var totalTestimonials = 3;
+var testimonialInterval;
+
+function showTestimonial(index) {
+    var slides = document.querySelectorAll('.testimonial-slide');
+    var dots = document.querySelectorAll('.testimonial-dot');
+    
+    slides.forEach(function(slide, i) {
+        slide.classList.toggle('active', i === index);
+    });
+    
+    dots.forEach(function(dot, i) {
+        dot.classList.toggle('active', i === index);
+    });
+    
+    currentTestimonial = index;
+}
+
+function nextTestimonial() {
+    currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+    showTestimonial(currentTestimonial);
+    resetTestimonialAutoPlay();
+}
+
+function prevTestimonial() {
+    currentTestimonial = (currentTestimonial - 1 + totalTestimonials) % totalTestimonials;
+    showTestimonial(currentTestimonial);
+    resetTestimonialAutoPlay();
+}
+
+function goToTestimonial(index) {
+    showTestimonial(index);
+    resetTestimonialAutoPlay();
+}
+
+function startTestimonialAutoPlay() {
+    testimonialInterval = setInterval(function() {
+        nextTestimonial();
+    }, 4000);
+}
+
+function resetTestimonialAutoPlay() {
+    clearInterval(testimonialInterval);
+    startTestimonialAutoPlay();
+}
+
+// Start testimonial auto-play
+startTestimonialAutoPlay();
+
+// ========== NAVIGATION ==========
 window.addEventListener('scroll', function() {
     var nav = document.getElementById('nav');
     var backTop = document.getElementById('backTop');
@@ -1330,23 +1219,16 @@ var hamburger = document.getElementById('hamburger');
 var navMenu = document.getElementById('navMenu');
 hamburger.addEventListener('click', function() { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); });
 document.querySelectorAll('.nav-menu a').forEach(function(link) { 
-    link.addEventListener('click', function() { 
-        hamburger.classList.remove('active'); 
-        navMenu.classList.remove('active'); 
-    }); 
+    link.addEventListener('click', function() { hamburger.classList.remove('active'); navMenu.classList.remove('active'); }); 
 });
 
-document.getElementById('backTop').addEventListener('click', function() { 
-    window.scrollTo({top: 0, behavior: 'smooth'}); 
-});
+document.getElementById('backTop').addEventListener('click', function() { window.scrollTo({top: 0, behavior: 'smooth'}); });
 
 document.querySelectorAll('a[href^="#"]').forEach(function(link) { 
     link.addEventListener('click', function(e) { 
         e.preventDefault(); 
         var target = document.querySelector(this.getAttribute('href')); 
-        if (target) { 
-            target.scrollIntoView({behavior: 'smooth'}); 
-        } 
+        if (target) target.scrollIntoView({behavior: 'smooth'}); 
     }); 
 });
 
@@ -1359,17 +1241,13 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.addEventListener('click', function() {
             filterBtns.forEach(function(b) { b.classList.remove('active'); });
             btn.classList.add('active');
-            
             var filter = btn.getAttribute('data-filter');
             
             portfolioItems.forEach(function(item, index) {
                 var category = item.getAttribute('data-category');
-                
                 if (filter === 'all' || category === filter) {
                     item.classList.remove('hidden');
-                    setTimeout(function() {
-                        item.classList.add('fade-in');
-                    }, index * 100);
+                    setTimeout(function() { item.classList.add('fade-in'); }, index * 100);
                 } else {
                     item.classList.add('hidden');
                     item.classList.remove('fade-in');
